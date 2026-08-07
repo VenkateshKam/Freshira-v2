@@ -20,10 +20,8 @@ import {
   CheckoutPage,
   ContactPage,
   FAQPage,
-  LegalPage,
-  PrivacyPolicyPage,
-  TermsAndConditionsPage,
-  ShippingPolicyPage,
+  PolicyPage,
+  WishlistPage,
   ProductDetailsPage,
   ProductsPage,
   ServicesPage,
@@ -49,20 +47,21 @@ const App = () => (
               <Route path="/categories" element={<CategoriesPage />} />
               <Route path="/categories/:slug" element={<CategoryPage />} />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/wishlist" element={<WishlistPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/testimonials" element={<TestimonialsPage />} />
               <Route path="/careers" element={<CareersPage />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-              <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
-              <Route path="/refund-policy" element={<LegalPage />} />
-              <Route path="/return-policy" element={<LegalPage />} />
-              <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
-              <Route path="/cancellation-policy" element={<LegalPage />} />
-              <Route path="/cookie-policy" element={<LegalPage />} />
-              <Route path="/disclaimer" element={<LegalPage />} />
+              <Route path="/privacy-policy" element={<PolicyPage />} />
+              <Route path="/terms-and-conditions" element={<PolicyPage />} />
+              <Route path="/refund-policy" element={<PolicyPage />} />
+              <Route path="/return-policy" element={<PolicyPage />} />
+              <Route path="/shipping-policy" element={<PolicyPage />} />
+              <Route path="/cancellation-policy" element={<PolicyPage />} />
+              <Route path="/cookie-policy" element={<PolicyPage />} />
+              <Route path="/disclaimer" element={<PolicyPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>
