@@ -1,215 +1,4811 @@
 export interface Product {
-  id: number;
-  name: string;
-  slug: string;
-  category: string;
-  categorySlug: string;
-  subcategory: string;
-  price: number;
-  unit: string;
-  image: string;
-  rating: number;
-  reviewCount: number;
-  availability: "in-stock" | "low-stock" | "out-of-stock";
-  featured: boolean;
-  description: string;
-  shortDescription: string;
-  originalPrice: number;
-  features: string[];
-  specifications: { label: string; value: string }[];
+  id: number; name: string; slug: string; category: string; categorySlug: string; subcategory: string; price: number; unit: string; image: string; rating: number; reviewCount: number; availability: "in-stock" | "low-stock" | "out-of-stock"; featured: boolean; description: string; shortDescription: string; originalPrice: number; features: string[]; specifications: { label: string; value: string }[];
 }
 
-type CatalogEntry = Omit<Product, "id" | "rating" | "reviewCount" | "availability" | "featured" | "shortDescription" | "originalPrice" | "features" | "specifications">;
-
-const catalogEntries: CatalogEntry[] = [
-  // Fresh fruits: apples
-  { name: "Royal Gala Apples", slug: "royal-gala-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 185, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Apple-3040132_640.jpg", description: "Crisp red Royal Gala-style apples selected for a naturally sweet, refreshing bite." },
-  { name: "Red Delicious Apples", slug: "red-delicious-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 195, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/0/0c/An_Apple_A_Day_%28151245827%29.jpeg", description: "Bright red apples with a mild sweetness and a clean, crisp texture." },
-  { name: "Fuji Apples", slug: "fuji-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 210, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/ab/Apple-2535260_1920.jpg", description: "Juicy, firm apples with balanced sweetness for snacking and lunch boxes." },
-  { name: "Honeycrisp Apples", slug: "honeycrisp-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 260, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Honeycrisp.jpg", description: "Honeycrisp apples prized for their bright flavour and exceptionally crisp bite." },
-  { name: "Pink Lady Apples", slug: "pink-lady-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 245, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/71/PinkLadyApples.JPG", description: "A rosy apple variety with a pleasant sweet-tart finish." },
-  { name: "Classic Red Apples", slug: "classic-red-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 175, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg", description: "Everyday red apples chosen for their firm flesh and easy snacking." },
-  { name: "Zoete Peppel Apples", slug: "zoete-peppel-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 225, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/78/Apple_Malus_domestica_Zoete_Peppel._%28actm%29.jpg", description: "A heritage-style apple selection with a gently sweet, aromatic profile." },
-  { name: "Maroon Apples", slug: "maroon-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 205, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/Maroon_young_apple_fruit_DSC01290.jpg", description: "Deep-coloured apples with a fresh flavour suited to salads and desserts." },
-  { name: "Golden Delicious Apples", slug: "golden-delicious-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 220, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Golden_Delicious_apples.jpg", description: "Golden apples with a mellow sweetness that works well fresh or baked." },
-  { name: "Garden Apples", slug: "garden-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 165, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/79/Apple_Fruit.jpg", description: "Fresh garden apples with a clean flavour for everyday family eating." },
-  // Fresh fruits: bananas
-  { name: "Congo Bananas", slug: "congo-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 65, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Banana%2C_Congo.jpg", description: "Naturally sweet bananas with a creamy texture and gentle tropical aroma." },
-  { name: "Sitia Bananas", slug: "sitia-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 70, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/78/Banana-Sitia-Crete.jpg", description: "Smooth, sunny bananas that ripen into a soft and fragrant snack." },
-  { name: "Cavendish Bananas", slug: "cavendish-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 60, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Banana_-_Q503.jpg", description: "A dependable everyday banana with a balanced sweetness." },
-  { name: "Mini Bananas", slug: "mini-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 85, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Banana_10.jpg", description: "Small-format bananas with concentrated sweetness, ideal for quick snacks." },
-  { name: "Dessert Bananas", slug: "dessert-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 68, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Banana_5.jpg", description: "Soft, naturally sweet bananas for smoothies, cereal and desserts." },
-  { name: "Fresh Yellow Bananas", slug: "fresh-yellow-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 62, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/5/56/Banana_7.jpg", description: "Bright yellow bananas selected at a ready-to-ripen stage." },
-  { name: "Ripe Bananas", slug: "ripe-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 58, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/5/53/Banana_8.jpg", description: "Ready-to-eat bananas with a soft texture and full fruit flavour." },
-  { name: "Farm Bananas", slug: "farm-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 59, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Banana_9.jpg", description: "Fresh farm bananas suited to breakfast bowls and baking." },
-  { name: "Saba Bananas", slug: "saba-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 78, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Banana_Saba.jpg", description: "A versatile banana variety with a hearty texture for cooking or eating fresh." },
-  { name: "Banana Cross-Section", slug: "banana-cross-section", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 64, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/f/ff/Banana_and_cross_section.jpg", description: "Fresh bananas with a creamy centre and naturally mild sweetness." },
-  { name: "Caturra Bananas", slug: "caturra-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 72, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/d/d3/Banana_caturra.JPG", description: "Caturra-style bananas with a fragrant tropical flavour." },
-  { name: "Musa Dessert Bananas", slug: "musa-dessert-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 66, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/4/43/Banana_fruit_%28musa%29.jpg", description: "Classic Musa bananas with a smooth texture for everyday eating." },
-  // Fresh fruits: oranges
-  { name: "Ambersweet Oranges", slug: "ambersweet-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 105, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/4/43/Ambersweet_oranges.jpg", description: "Juicy Ambersweet-style oranges with bright citrus flavour." },
-  { name: "Blood Oranges", slug: "blood-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 190, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/f/fb/Blood_orange_%28DSCF7480%29.jpg", description: "Distinctive blood oranges with a deep colour and sweet-tart finish." },
-  { name: "Blood Orange Slices", slug: "blood-orange-slices", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 130, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Blood_orange_slice.jpg", description: "Fresh-cut blood orange pieces for salads, drinks and desserts." },
-  { name: "Sweet Table Oranges", slug: "sweet-table-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 95, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/ab/Orange-fruit-16x16.jpg", description: "Sweet table oranges with refreshing juice and fragrant zest." },
-  { name: "Valencia Oranges", slug: "valencia-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 110, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/9/94/Orange_--_2022_--_9711.jpg", description: "Juicy Valencia-style oranges for breakfast, juicing and cooking." },
-  { name: "Navel Oranges", slug: "navel-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 115, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Orange_--_2022_--_9713.jpg", description: "Easy-to-peel navel oranges with a clean, sweet citrus flavour." },
-  { name: "Premium Juice Oranges", slug: "premium-juice-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 100, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/8/80/Orange_--_2022_--_9715.jpg", description: "Full-juiced oranges selected for morning juice and everyday refreshment." },
-  { name: "Citrus Oranges", slug: "citrus-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 98, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/0/07/Orange_--_2022_--_9718.jpg", description: "Fresh citrus oranges with a lively aroma and balanced acidity." },
-  { name: "Farmhouse Oranges", slug: "farmhouse-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 92, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/3/37/Orange_--_2022_--_9721.jpg", description: "Everyday farmhouse oranges with plenty of juice and gentle sweetness." },
-  { name: "Navelina Oranges", slug: "navelina-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 125, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/7a/Navelina_oranges.jpg", description: "Navelina-style oranges with a bright, juicy profile." },
-  // Fresh fruits: mangoes
-  { name: "Raw Green Mangoes", slug: "raw-green-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 90, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/5/59/An_unripe_mango_in_jaffna.JPG", description: "Firm green mangoes with a pleasantly tangy flavour for pickles and chutneys." },
-  { name: "Apple Mangoes", slug: "apple-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 165, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/9/92/Apple_mango_and_cross_section_edit1.jpg", description: "A fragrant apple-mango style fruit with juicy flesh and a floral finish." },
-  { name: "Alphonso-Style Mangoes", slug: "alphonso-style-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 280, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Mango_Mangifera_indica_fruit_by_Raju_Kasambe_DSCN2626_12.jpg", description: "Richly aromatic mangoes with soft golden flesh and dessert sweetness." },
-  { name: "Kesar-Style Mangoes", slug: "kesar-style-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 245, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/b/be/Mango_Mangifera_indica_fruit_by_Raju_Kasambe_DSCN2626_14.jpg", description: "A fragrant mango selection with a smooth, juicy bite." },
-  { name: "Small Dessert Mangoes", slug: "small-dessert-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 175, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Mango_Small.JPG", description: "Small mangoes with concentrated tropical sweetness for snacking." },
-  { name: "Nam Dok Mai Mangoes", slug: "nam-dok-mai-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 320, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/af/Mango_fruit_Nam_Dok_Mai.jpg", description: "Nam Dok Mai-style mangoes with silky flesh and honeyed aroma." },
-  { name: "Nam Dok Mai Cut Mango", slug: "nam-dok-mai-cut-mango", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 170, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/c/cb/Mango_fruit_Nam_Dok_Mai_-_cross_section.jpg", description: "Fresh-cut mango pieces with smooth texture for desserts and bowls." },
-  { name: "White Background Mangoes", slug: "white-background-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 185, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/3/34/Mango_on_white.jpg", description: "Ripe mangoes with sunny colour, soft flesh and a tropical finish." },
-  // Fresh fruits: lemons and berries
-  { name: "Fresh Lemons", slug: "fresh-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 75, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/e/e4/Lemon.jpg", description: "Bright, juicy lemons for dressings, drinks and everyday cooking." },
-  { name: "Whole Cut Lemons", slug: "whole-cut-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 80, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/f/f7/Lemon_-_whole_and_split.jpg", description: "Fresh lemons with fragrant zest and lively acidity." },
-  { name: "Citrus Limon Lemons", slug: "citrus-limon-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 85, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Lemon_%28Citrus_limon_aka_Citrus_%C3%97_limon%29.jpg", description: "Classic Citrus limon fruit with a sharp, refreshing flavour." },
-  { name: "Large Yellow Lemons", slug: "large-yellow-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 90, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Lemon_Fruit.jpg", description: "Plump yellow lemons with generous juice for kitchen staples." },
-  { name: "Shadow-Grown Lemons", slug: "shadow-grown-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 78, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/6/61/Lemon_with_shadow_lighting.jpg", description: "Fresh lemons with a clean citrus aroma and versatile acidity." },
-  { name: "Dewy Lemons", slug: "dewy-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 82, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/d/d3/Lemon_with_water_drop.jpg", description: "Juicy lemons selected for their fragrant peel and bright flavour." },
-  { name: "Garden Lemon Fruit", slug: "garden-lemon-fruit", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 72, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Picture_of_a_lemon_fruit.jpg", description: "Everyday garden lemons for tea, marinades and home cooking." },
-  { name: "Assam Lemons", slug: "assam-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 88, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Lemon_from_Assam.jpg", description: "Aromatic lemons with a lively sourness and plenty of kitchen uses." },
-  { name: "Studio Strawberries", slug: "studio-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 220, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/d/de/FraiseFruitPhoto.jpg", description: "Red strawberries with a delicate aroma and naturally sweet finish." },
-  { name: "Wild Strawberries", slug: "wild-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 280, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/7/7a/Fragaria_vesca_fruit_-_Keila.jpg", description: "Small, fragrant strawberry fruit with a concentrated berry flavour." },
-  { name: "Fresh Farm Strawberries", slug: "fresh-farm-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 210, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/5/55/Strawberry_fruit_in_studio.jpg", description: "Fresh strawberries selected for firm texture and bright colour." },
-  { name: "Sliced Strawberries", slug: "sliced-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 230, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Strawberry_fruit_sliced.jpg", description: "Fresh strawberry pieces ready for breakfast bowls and desserts." },
-  { name: "White Background Strawberries", slug: "white-background-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 215, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Strawberry_on_white_background.jpg", description: "Sweet, juicy strawberries with a fresh berry aroma." },
-  { name: "Everyday Strawberries", slug: "everyday-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 200, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/b/bf/Strawberry-10.jpg", description: "Bright strawberries for snacking, smoothies and homemade desserts." },
-  { name: "Premium Strawberries", slug: "premium-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 250, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/7/7a/Strawberry-2293337_960_720.jpg", description: "Premium strawberries with a juicy bite and balanced sweetness." },
-  { name: "Strawberry Sorbet Fruit", slug: "strawberry-sorbet-fruit", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 240, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Strawberry_Sorbetta.jpg", description: "A fragrant strawberry selection suited to fresh desserts and chilled treats." },
-  // Fresh fruits: pineapple, watermelon and grapes
-  { name: "Whole Pineapple", slug: "whole-pineapple", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 120, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/9/94/Pineapple-fruit.jpg", description: "A fragrant pineapple with juicy golden flesh and refreshing acidity." },
-  { name: "Dagbani Pineapple", slug: "dagbani-pineapple", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 125, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Pineapple_%28Alaafee_in_dagbani%29.jpg", description: "Sweet tropical pineapple selected for its aromatic fruit flesh." },
-  { name: "Pineapple Chunks", slug: "pineapple-chunks", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 145, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/8/80/Pineapple_Chunks.jpg", description: "Juicy pineapple chunks ready for bowls, desserts and fruit salads." },
-  { name: "Fresh Pineapple Fruit", slug: "fresh-pineapple-fruit", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 118, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/6/63/Pineapple_Fruit.jpg", description: "Fresh pineapple with tropical sweetness and a lively citrus note." },
-  { name: "Candied Pineapple", slug: "candied-pineapple", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 180, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Pineapple_candied_fruit_%281%29.jpg", description: "Sweet candied pineapple pieces for baking, gifting and desserts." },
-  { name: "Golden Candied Pineapple", slug: "golden-candied-pineapple", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 185, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Pineapple_candied_fruit_%282%29.jpg", description: "Golden candied pineapple with a chewy texture and tropical aroma." },
-  { name: "April Pineapple", slug: "april-pineapple", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 122, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Pineapple_fruit%2C_April_2023.jpg", description: "Fresh pineapple fruit with juicy flesh for family sharing." },
-  { name: "Pineapple Fruit Two", slug: "pineapple-fruit-two", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 124, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Pineapple_fruit_2.jpg", description: "A ripe pineapple with a bright tropical flavour and juicy texture." },
-  { name: "Hong Kong Watermelon", slug: "hong-kong-watermelon", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Watermelons", price: 95, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/8/84/HK_fruit_%E8%A5%BF%E7%93%9C_watermelon_August_2020_SS2_01.jpg", description: "Refreshing watermelon with crisp flesh and cooling sweetness." },
-  { name: "Fresh Red Watermelon", slug: "fresh-red-watermelon", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Watermelons", price: 92, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/1/11/HK_fruit_%E8%A5%BF%E7%93%9C_watermelon_August_2020_SS2_02.jpg", description: "Red-fleshed watermelon for summer drinks, salads and snacking." },
-  { name: "Ripe Watermelon", slug: "ripe-watermelon", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Watermelons", price: 98, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/78/Ripe_watermelon_Fruit.jpg", description: "Ripe watermelon with a juicy bite and clean, cool finish." },
-  { name: "Watermelon Fruit", slug: "watermelon-fruit", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Watermelons", price: 90, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/Watermelon001.jpg", description: "Fresh watermelon selected for crisp texture and natural sweetness." },
-  { name: "Bahar Watermelon", slug: "bahar-watermelon", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Watermelons", price: 100, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Watermelon_Bahar1.jpg", description: "A juicy watermelon variety for refreshing family portions." },
-  { name: "Green Table Grapes", slug: "green-table-grapes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Grapes", price: 160, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/2/22/Bijelo_grozde.jpg", description: "Crisp green table grapes with a light sweetness and refreshing finish." },
-  { name: "Close-Up Green Grapes", slug: "close-up-green-grapes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Grapes", price: 165, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/8/83/Green_Grape_2.jpg", description: "Fresh green grapes selected for crisp texture and bright flavour." },
-  { name: "Premium Green Grapes", slug: "premium-green-grapes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Grapes", price: 175, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Green_Grape_3.jpg", description: "Sweet, juicy green grapes for snacking, cheese boards and desserts." },
-  // Fresh vegetables: potatoes and carrots
-  { name: "Table Potatoes", slug: "table-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 45, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/a3/234_Solanum_tuberosum_L.jpg", description: "Versatile table potatoes with firm flesh for roasting, boiling and curries." },
-  { name: "Dore Potatoes", slug: "dore-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 52, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/3/38/Dor%C3%A9_%28Solanum_tuberosum%29.jpg", description: "A golden potato selection with a creamy texture when cooked." },
-  { name: "Fresh Solanum Potatoes", slug: "fresh-solanum-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 48, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/a1/Potato_%28Solanum_tuberosum%29_%2835871124806%29.jpg", description: "Fresh potatoes for everyday meals, fries and comforting bakes." },
-  { name: "Russet Potatoes", slug: "russet-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 65, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/4/47/Russet_potato_cultivar_with_sprouts.jpg", description: "Russet-style potatoes with a fluffy centre and hearty skin." },
-  { name: "Mannheim Potatoes", slug: "mannheim-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 55, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/1/17/Solanum_tuberosum_Mannheim.jpg", description: "Firm potatoes suited to roasting, mash and home-style cooking." },
-  { name: "Puca Quitish Potatoes", slug: "puca-quitish-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 70, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/6/60/Solanum_tuberosum_Puca_Quitish.jpg", description: "A distinctive potato variety with a satisfying, earthy flavour." },
-  { name: "Red Scarlett Potatoes", slug: "red-scarlett-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 60, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Solanum_tuberosum_Red_Scarlett20170523_7825.jpg", description: "Red-skinned potatoes with firm flesh for salads and roasting." },
-  { name: "Garden Potatoes", slug: "garden-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 42, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Starr_080914-9946_Solanum_tuberosum.jpg", description: "Everyday garden potatoes for curries, fries and family dinners." },
-  { name: "White Potatoes", slug: "white-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 44, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/6/60/Solanum_tuberosum_03.JPG", description: "Clean, firm white potatoes with a dependable cooking texture." },
-  { name: "Large Potatoes", slug: "large-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 46, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/73/Solanum_tuberosum_04.jpg", description: "Large potatoes ready for baking, wedges and hearty home cooking." },
-  { name: "Carrot.1", slug: "carrot-1", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 42, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/3/39/Carrot.1.jpg", description: "Crunchy orange carrots for salads, soups and everyday cooking." },
-  { name: "Market Carrots", slug: "market-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 40, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Carrot_%2846504416%29.jpeg", description: "Fresh carrots with a naturally sweet crunch and bright colour." },
-  { name: "Classic Carrots", slug: "classic-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 38, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Carrot_Picture.jpg", description: "Everyday carrots selected for firm texture and clean flavour." },
-  { name: "Fresh View Carrots", slug: "fresh-view-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 41, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/0/05/Carrot_view.jpg", description: "Fresh orange carrots for roasting, juicing and lunch boxes." },
-  { name: "Farm Carrots", slug: "farm-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 39, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/d/dc/Carrot-fb.jpg", description: "Farm-style carrots with a crisp bite and gentle sweetness." },
-  { name: "April Carrots", slug: "april-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 43, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/9/92/Carrot_vegetables%2C_April_2023.jpg", description: "Bright fresh carrots for soups, stir-fries and salads." },
-  { name: "Daucus Carota Carrots", slug: "daucus-carota-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 45, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/c/cf/Carrots_-_Daucus_carota_subsp._sativus.jpg", description: "Classic Daucus carota carrots with a crisp, naturally sweet flavour." },
-  { name: "Berlikumer Carrots", slug: "berlikumer-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 48, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Daucus_carota_subsp._sativus_Berlikumer_2_-_Perfekcja_REW_2023-06-13_7557.jpg", description: "Berlikumer-style carrots with firm flesh and rich orange colour." },
-  { name: "Berlikumer Select Carrots", slug: "berlikumer-select-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 50, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/2/22/Daucus_carota_subsp._sativus_Berlikumer_2_-_Perfekcja_REW_2023-06-13_7558.jpg", description: "Selected Berlikumer carrots for roasting, soups and fresh juice." },
-  // Fresh vegetables: garlic, peppers, onion and greens
-  { name: "Garlic Bulb", slug: "garlic-bulb", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Garlic", price: 55, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Garlic.JPG", description: "Aromatic garlic bulbs for tempering, marinades and everyday cooking." },
-  { name: "Salem Garlic Bulbs", slug: "salem-garlic-bulbs", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Garlic", price: 68, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/6/65/Garlic_bulbs_of_Salem.jpg", description: "Pungent garlic bulbs with a rich aroma and clean cloves." },
-  { name: "Fresh Garlic Cloves", slug: "fresh-garlic-cloves", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Garlic", price: 62, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/4/47/Garlic_Cloves.jpg", description: "Peeled garlic cloves ready for sauces, curries and roasting." },
-  { name: "Garlic Bulbs and Cloves", slug: "garlic-bulbs-and-cloves", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Garlic", price: 60, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Garlic_bulbs_and_cloves.jpg", description: "Fresh garlic with full bulbs and easy-to-use cloves." },
-  { name: "Garlic Bulbs in Bag", slug: "garlic-bulbs-in-bag", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Garlic", price: 58, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Garlic_bulbs_in_a_bag.jpg", description: "Kitchen-ready garlic bulbs with a strong, savoury aroma." },
-  { name: "Opened Garlic Bulb", slug: "opened-garlic-bulb", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Garlic", price: 64, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/4/49/Opened_garlic_bulb_with_garlic_clove.jpg", description: "Fresh garlic bulb with firm cloves for flavourful home cooking." },
-  { name: "Baby Bell Peppers", slug: "baby-bell-peppers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 115, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/2/2d/Baby_Bell_pepper_%27%27Capsicum_annuum%27%27_.jpg", description: "Small sweet peppers with crisp flesh for salads and stir-fries." },
-  { name: "Baby Bell Pepper Three", slug: "baby-bell-pepper-three", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 120, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/2/23/Baby_Bell_pepper_Capsicum_annuum_3.jpg", description: "Colourful baby bell peppers with a gentle sweetness and crunch." },
-  { name: "Fiesta Peppers", slug: "fiesta-peppers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 105, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/1/11/Capsicum_annuum_var._Fiesta_-_MHNT.jpg", description: "Fiesta-style peppers for bright, crisp everyday cooking." },
-  { name: "Green Peppers", slug: "green-peppers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 90, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/3/35/Green_pepper_%F0%9F%8D%B6%EF%B8%8F.jpg", description: "Crisp green peppers with a fresh, lightly grassy flavour." },
-  { name: "Ile Baby Bell Peppers", slug: "ile-baby-bell-peppers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 118, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/4/4a/IleBaby_Bell_pepper_Capsicum_annuum_2.jpg", description: "Tender baby bell peppers for roasting, stuffing and salads." },
-  { name: "Sweet Pepper 04", slug: "sweet-pepper-04", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 95, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/8/8b/Pepper_04.jpg", description: "Fresh sweet pepper with crisp flesh for daily meals." },
-  { name: "Sweet Pepper 05", slug: "sweet-pepper-05", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 95, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/5/55/Pepper_05.jpg", description: "Bright sweet pepper selected for clean flavour and firm texture." },
-  { name: "Red Bell Peppers", slug: "red-bell-peppers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 110, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Red_bell_pepper.jpg", description: "Crisp red bell peppers with mellow sweetness for salads and cooking." },
-  { name: "Spanish Onions", slug: "spanish-onions", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Onions", price: 48, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Ida_Pulis_Lathrop_Spanish_onion.jpg", description: "Mild Spanish-style onions with a clean, savoury flavour." },
-  { name: "Onion Greens", slug: "onion-greens", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Onions", price: 35, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Onion_leaves.JPG", description: "Fresh onion greens for garnishes, stir-fries and savoury dishes." },
-  { name: "Everyday Onions", slug: "everyday-onions", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Onions", price: 42, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/1/13/Onion_vegetable.jpg", description: "Versatile onions for curries, soups, salads and everyday cooking." },
-  { name: "Fresh Onion Vegetable", slug: "fresh-onion-vegetable", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Onions", price: 44, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Onions_vegetable.jpg", description: "Fresh onions with a balanced bite and dependable kitchen value." },
-  { name: "Baked Onion Selection", slug: "baked-onion-selection", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Onions", price: 52, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Baked_onions.jpg", description: "Onions selected for their sweet, savoury character when roasted or baked." },
-  { name: "Fresh Cabbage", slug: "fresh-cabbage", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cabbage", price: 55, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/A_cabbage_vegetables.jpg", description: "Fresh cabbage with crisp leaves for slaws, stir-fries and curries." },
-  { name: "Green Cabbage", slug: "green-cabbage", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cabbage", price: 52, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/6/60/Cabbage_001.jpg", description: "Firm green cabbage with fresh leaves and a mild flavour." },
-  { name: "Cabbage Vegetable", slug: "cabbage-vegetable", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cabbage", price: 54, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Cabbage_Vegetable.jpg", description: "A versatile cabbage for soups, wraps, salads and home cooking." },
-  { name: "Fresh White Cabbage", slug: "fresh-white-cabbage", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cabbage", price: 56, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Cabbage_vegetable.jpg", description: "Fresh white cabbage with crisp texture and gentle sweetness." },
-  { name: "Tender Cabbage", slug: "tender-cabbage", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cabbage", price: 58, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Fresh_cabbage_1.jpg", description: "Tender cabbage selected for fresh leaves and easy preparation." },
-  // Fresh vegetables: broccoli, eggplant and cucumber
-  { name: "Romanesco Broccoli", slug: "romanesco-broccoli", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Broccoli", price: 135, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Romanesco_broccoli_%28Brassica_oleracea%29.jpg", description: "Distinctive Romanesco broccoli with firm florets and a mild nutty flavour." },
-  { name: "Romanesco Broccoli 2025", slug: "romanesco-broccoli-2025", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Broccoli", price: 140, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/b/b6/Romanesco_broccoli_2025_G1.jpg", description: "Fresh Romanesco florets for steaming, roasting and vegetable bowls." },
-  { name: "Romanesco Broccoli Select", slug: "romanesco-broccoli-select", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Broccoli", price: 145, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/2/26/Romanesco_broccoli_2025_G2.jpg", description: "A carefully selected Romanesco head with crisp, tender florets." },
-  { name: "Broccoli Cross Section", slug: "broccoli-cross-section", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Broccoli", price: 125, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/0/03/Broccoli_and_cross_section_edit.jpg", description: "Fresh broccoli with compact florets for quick, wholesome cooking." },
-  { name: "Eggplant", slug: "eggplant", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Eggplant", price: 65, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/8/89/Egg_plant.JPG", description: "Glossy eggplant with tender flesh for curries, grilling and roasting." },
-  { name: "Classic Aubergine", slug: "classic-aubergine", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Eggplant", price: 70, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/9/96/Eggplant_(227905221).jpeg", description: "Classic aubergine with smooth skin and a creamy cooked texture." },
-  { name: "Brinjal", slug: "brinjal", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Eggplant", price: 62, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/0/05/Eggplant_aubergine_brinjal.jpg", description: "Fresh brinjal for bharta, sambhar, stir-fries and family meals." },
-  { name: "Fresh Cucumbers", slug: "fresh-cucumbers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cucumbers", price: 45, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Cucumber_in_jaffna.JPG", description: "Cool, crisp cucumbers for salads, raita and refreshing snacks." },
-  { name: "Cucumis Sativus Cucumbers", slug: "cucumis-sativus-cucumbers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cucumbers", price: 48, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/0/07/Cucumis_sativus_0001.JPG", description: "Fresh Cucumis sativus cucumbers with a clean, watery crunch." },
-  // Rice and grains
-  { name: "Long Grain Rice", slug: "long-grain-rice", category: "Rice", categorySlug: "rice", subcategory: "Long Grain", price: 105, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Single_grain_of_rice.png", description: "Long grain rice with separate grains for pilafs, bowls and everyday meals." },
-  { name: "White Rice Grains", slug: "white-rice-grains", category: "Rice", categorySlug: "rice", subcategory: "White Rice", price: 95, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Rice_Grains.jpg", description: "Clean white rice grains for dependable daily cooking." },
-  { name: "Polished Rice", slug: "polished-rice", category: "Rice", categorySlug: "rice", subcategory: "White Rice", price: 100, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Rice_Grains_.png", description: "Smooth rice grains that cook into a light, comforting staple." },
-  { name: "Sprouted Rice", slug: "sprouted-rice", category: "Rice", categorySlug: "rice", subcategory: "Specialty Rice", price: 135, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Rice_grain_sprouted.jpg", description: "A specialty rice grain selection for thoughtful pantry cooking." },
-  { name: "IRRI Rice Grains", slug: "irri-rice-grains", category: "Rice", categorySlug: "rice", subcategory: "Rice Grains", price: 110, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Rice_grains_%28IRRI%29.jpg", description: "Rice grains selected for consistent texture in everyday recipes." },
-  { name: "Japanese Short-Grain Rice", slug: "japanese-short-grain-rice", category: "Rice", categorySlug: "rice", subcategory: "Short Grain", price: 180, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/2/29/Short-grain_rice_%28japonica%29.jpg", description: "Short-grain Japanese-style rice with a naturally tender, cohesive texture." },
-  { name: "Brown Rice", slug: "brown-rice", category: "Rice", categorySlug: "rice", subcategory: "Brown Rice", price: 145, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/4/45/Brown_rice_%28whole_grain_rice%29_photographed_in_West_Bengal%2C_India.jpg", description: "Whole-grain brown rice with a satisfying bite for balanced meals." },
-  { name: "Purple Rice", slug: "purple-rice", category: "Rice", categorySlug: "rice", subcategory: "Specialty Rice", price: 190, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Purple_rice_grains.jpg", description: "Naturally dark purple rice grains for colourful bowls and special dishes." },
-  { name: "US Long Grain Rice", slug: "us-long-grain-rice", category: "Rice", categorySlug: "rice", subcategory: "Long Grain", price: 115, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/e/e9/U.S._long_grain_rice_K7577-1.jpg", description: "Long grain rice with a light, fluffy finish after cooking." },
-  { name: "Defective Grain Reference Rice", slug: "defective-grain-reference-rice", category: "Rice", categorySlug: "rice", subcategory: "Specialty Rice", price: 90, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/1/1c/Defective_rice_grains.jpg", description: "A specialty grain selection presented for pantry and cooking exploration." }
+const productSeed: Product[] = [
+  {
+    "id": 1,
+    "name": "Apple",
+    "slug": "apple",
+    "category": "Fresh Fruits",
+    "categorySlug": "fresh-fruits",
+    "subcategory": "Apple",
+    "price": 120,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/960px-Red_Apple.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 30,
+    "availability": "low-stock",
+    "featured": true,
+    "description": "Apple selected for dependable quality and everyday use.",
+    "shortDescription": "Apple, prepared for convenient everyday use.",
+    "originalPrice": 134,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Apple"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Banana",
+    "slug": "banana",
+    "category": "Fresh Fruits",
+    "categorySlug": "fresh-fruits",
+    "subcategory": "Banana",
+    "price": 120,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Cavendish_banana_from_Maracaibo.jpg/960px-Cavendish_banana_from_Maracaibo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 47,
+    "availability": "in-stock",
+    "featured": true,
+    "description": "Banana selected for dependable quality and everyday use.",
+    "shortDescription": "Banana, prepared for convenient everyday use.",
+    "originalPrice": 134,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Banana"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Mango",
+    "slug": "mango",
+    "category": "Fresh Fruits",
+    "categorySlug": "fresh-fruits",
+    "subcategory": "Mango",
+    "price": 120,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Mangos_-_single_and_halved.jpg/960px-Mangos_-_single_and_halved.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 64,
+    "availability": "in-stock",
+    "featured": true,
+    "description": "Mango selected for dependable quality and everyday use.",
+    "shortDescription": "Mango, prepared for convenient everyday use.",
+    "originalPrice": 134,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Mango"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Papaya",
+    "slug": "papaya",
+    "category": "Fresh Fruits",
+    "categorySlug": "fresh-fruits",
+    "subcategory": "Papaya",
+    "price": 120,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Papaya_-_longitudinal_section_close-up_view.jpg/960px-Papaya_-_longitudinal_section_close-up_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 81,
+    "availability": "in-stock",
+    "featured": true,
+    "description": "Papaya selected for dependable quality and everyday use.",
+    "shortDescription": "Papaya, prepared for convenient everyday use.",
+    "originalPrice": 134,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Papaya"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Guava",
+    "slug": "guava",
+    "category": "Fresh Fruits",
+    "categorySlug": "fresh-fruits",
+    "subcategory": "Guava",
+    "price": 120,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Guava_ID.jpg/960px-Guava_ID.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 98,
+    "availability": "in-stock",
+    "featured": true,
+    "description": "Guava selected for dependable quality and everyday use.",
+    "shortDescription": "Guava, prepared for convenient everyday use.",
+    "originalPrice": 134,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Guava"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Orange",
+    "slug": "orange",
+    "category": "Fresh Fruits",
+    "categorySlug": "fresh-fruits",
+    "subcategory": "Orange",
+    "price": 120,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Oranges_-_whole-halved-segment.jpg/960px-Oranges_-_whole-halved-segment.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 115,
+    "availability": "in-stock",
+    "featured": true,
+    "description": "Orange selected for dependable quality and everyday use.",
+    "shortDescription": "Orange, prepared for convenient everyday use.",
+    "originalPrice": 134,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Orange"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Grapes",
+    "slug": "grapes",
+    "category": "Fresh Fruits",
+    "categorySlug": "fresh-fruits",
+    "subcategory": "Grapes",
+    "price": 120,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Grapes%2C_Dry_Creek_Valley-7705.jpg/960px-Grapes%2C_Dry_Creek_Valley-7705.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 132,
+    "availability": "in-stock",
+    "featured": true,
+    "description": "Grapes selected for dependable quality and everyday use.",
+    "shortDescription": "Grapes, prepared for convenient everyday use.",
+    "originalPrice": 134,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Grapes"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Pomegranate",
+    "slug": "pomegranate",
+    "category": "Fresh Fruits",
+    "categorySlug": "fresh-fruits",
+    "subcategory": "Pomegranate",
+    "price": 120,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Pomegranate_fruit_-_whole_and_piece_with_arils.jpg/960px-Pomegranate_fruit_-_whole_and_piece_with_arils.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 149,
+    "availability": "in-stock",
+    "featured": true,
+    "description": "Pomegranate selected for dependable quality and everyday use.",
+    "shortDescription": "Pomegranate, prepared for convenient everyday use.",
+    "originalPrice": 134,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Pomegranate"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Tomato",
+    "slug": "tomato",
+    "category": "Fresh Vegetables",
+    "categorySlug": "fresh-vegetables",
+    "subcategory": "Tomato",
+    "price": 65,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tomato_je.jpg/960px-Tomato_je.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 166,
+    "availability": "in-stock",
+    "featured": true,
+    "description": "Tomato selected for dependable quality and everyday use.",
+    "shortDescription": "Tomato, prepared for convenient everyday use.",
+    "originalPrice": 75,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Tomato"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Vegetables"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Onion",
+    "slug": "onion",
+    "category": "Fresh Vegetables",
+    "categorySlug": "fresh-vegetables",
+    "subcategory": "Onion",
+    "price": 65,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Mixed_onions.jpg/960px-Mixed_onions.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 183,
+    "availability": "in-stock",
+    "featured": true,
+    "description": "Onion selected for dependable quality and everyday use.",
+    "shortDescription": "Onion, prepared for convenient everyday use.",
+    "originalPrice": 75,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Onion"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Vegetables"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Potato",
+    "slug": "potato",
+    "category": "Fresh Vegetables",
+    "categorySlug": "fresh-vegetables",
+    "subcategory": "Potato",
+    "price": 65,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Potato_flowers_2016_G1.jpg/960px-Potato_flowers_2016_G1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 200,
+    "availability": "in-stock",
+    "featured": true,
+    "description": "Potato selected for dependable quality and everyday use.",
+    "shortDescription": "Potato, prepared for convenient everyday use.",
+    "originalPrice": 75,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Potato"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Vegetables"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Carrot",
+    "slug": "carrot",
+    "category": "Fresh Vegetables",
+    "categorySlug": "fresh-vegetables",
+    "subcategory": "Carrot",
+    "price": 65,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Carrots_of_many_colors.jpg/960px-Carrots_of_many_colors.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 217,
+    "availability": "in-stock",
+    "featured": true,
+    "description": "Carrot selected for dependable quality and everyday use.",
+    "shortDescription": "Carrot, prepared for convenient everyday use.",
+    "originalPrice": 75,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Carrot"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Vegetables"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Cabbage",
+    "slug": "cabbage",
+    "category": "Fresh Vegetables",
+    "categorySlug": "fresh-vegetables",
+    "subcategory": "Cabbage",
+    "price": 65,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Pieris_brassicae_-_Large_Cabbage_White_-_02.jpg/960px-Pieris_brassicae_-_Large_Cabbage_White_-_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 234,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Cabbage selected for dependable quality and everyday use.",
+    "shortDescription": "Cabbage, prepared for convenient everyday use.",
+    "originalPrice": 75,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Cabbage"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Vegetables"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Cauliflower",
+    "slug": "cauliflower",
+    "category": "Fresh Vegetables",
+    "categorySlug": "fresh-vegetables",
+    "subcategory": "Cauliflower",
+    "price": 65,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Starr-191212-7172-Brassica_oleracea_var_botrytis-homegrown_cauliflower-Hawea_Pl_Olinda-Maui_%2849254727061%29.jpg/960px-Starr-191212-7172-Brassica_oleracea_var_botrytis-homegrown_cauliflower-Hawea_Pl_Olinda-Maui_%2849254727061%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 251,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Cauliflower selected for dependable quality and everyday use.",
+    "shortDescription": "Cauliflower, prepared for convenient everyday use.",
+    "originalPrice": 75,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Cauliflower"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Vegetables"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Spinach",
+    "slug": "spinach",
+    "category": "Fresh Vegetables",
+    "categorySlug": "fresh-vegetables",
+    "subcategory": "Spinach",
+    "price": 65,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/77/Karyotype_of_Spinach_%28Spinacia_oleracea_L._Mazeran%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "rating": 4.6,
+    "reviewCount": 268,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Spinach selected for dependable quality and everyday use.",
+    "shortDescription": "Spinach, prepared for convenient everyday use.",
+    "originalPrice": 75,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Spinach"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Vegetables"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Brinjal",
+    "slug": "brinjal",
+    "category": "Fresh Vegetables",
+    "categorySlug": "fresh-vegetables",
+    "subcategory": "Brinjal",
+    "price": 65,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/An_aubergine-eggplant-brinjal_plant_with_a_hanging_fruit..jpg/960px-An_aubergine-eggplant-brinjal_plant_with_a_hanging_fruit..jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 45,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Brinjal selected for dependable quality and everyday use.",
+    "shortDescription": "Brinjal, prepared for convenient everyday use.",
+    "originalPrice": 75,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Brinjal"
+      },
+      {
+        "label": "Category",
+        "value": "Fresh Vegetables"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Dragon Fruit",
+    "slug": "dragon-fruit",
+    "category": "Exotic Fruits",
+    "categorySlug": "exotic-fruits",
+    "subcategory": "Dragon Fruit",
+    "price": 240,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Yellow_dragon_fruit_with_spoon_%2850847s%29.jpg/960px-Yellow_dragon_fruit_with_spoon_%2850847s%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 62,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Dragon Fruit selected for dependable quality and everyday use.",
+    "shortDescription": "Dragon Fruit, prepared for convenient everyday use.",
+    "originalPrice": 269,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Dragon Fruit"
+      },
+      {
+        "label": "Category",
+        "value": "Exotic Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Kiwi",
+    "slug": "kiwi",
+    "category": "Exotic Fruits",
+    "categorySlug": "exotic-fruits",
+    "subcategory": "Kiwi",
+    "price": 240,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Kiwi_%28Actinidia_chinensis%29_1_Luc_Viatour.jpg/960px-Kiwi_%28Actinidia_chinensis%29_1_Luc_Viatour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 79,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Kiwi selected for dependable quality and everyday use.",
+    "shortDescription": "Kiwi, prepared for convenient everyday use.",
+    "originalPrice": 269,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Kiwi"
+      },
+      {
+        "label": "Category",
+        "value": "Exotic Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Avocado",
+    "slug": "avocado",
+    "category": "Exotic Fruits",
+    "categorySlug": "exotic-fruits",
+    "subcategory": "Avocado",
+    "price": 240,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Avocado_Hass_-_single_and_halved.jpg/960px-Avocado_Hass_-_single_and_halved.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 96,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Avocado selected for dependable quality and everyday use.",
+    "shortDescription": "Avocado, prepared for convenient everyday use.",
+    "originalPrice": 269,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Avocado"
+      },
+      {
+        "label": "Category",
+        "value": "Exotic Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Blueberry",
+    "slug": "blueberry",
+    "category": "Exotic Fruits",
+    "categorySlug": "exotic-fruits",
+    "subcategory": "Blueberry",
+    "price": 240,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Juvenile_Eastern_Bluebird_in_Blueberry_Bush.jpg/960px-Juvenile_Eastern_Bluebird_in_Blueberry_Bush.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 113,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Blueberry selected for dependable quality and everyday use.",
+    "shortDescription": "Blueberry, prepared for convenient everyday use.",
+    "originalPrice": 269,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Blueberry"
+      },
+      {
+        "label": "Category",
+        "value": "Exotic Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Strawberry",
+    "slug": "strawberry",
+    "category": "Exotic Fruits",
+    "categorySlug": "exotic-fruits",
+    "subcategory": "Strawberry",
+    "price": 240,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Garden_strawberry_%28Fragaria_%C3%97_ananassa%29_halved.jpg/960px-Garden_strawberry_%28Fragaria_%C3%97_ananassa%29_halved.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 130,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Strawberry selected for dependable quality and everyday use.",
+    "shortDescription": "Strawberry, prepared for convenient everyday use.",
+    "originalPrice": 269,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Strawberry"
+      },
+      {
+        "label": "Category",
+        "value": "Exotic Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Broccoli",
+    "slug": "broccoli",
+    "category": "Exotic Vegetables",
+    "categorySlug": "exotic-vegetables",
+    "subcategory": "Broccoli",
+    "price": 160,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Romanesco_broccoli_2025_G2.jpg/960px-Romanesco_broccoli_2025_G2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 147,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Broccoli selected for dependable quality and everyday use.",
+    "shortDescription": "Broccoli, prepared for convenient everyday use.",
+    "originalPrice": 179,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Broccoli"
+      },
+      {
+        "label": "Category",
+        "value": "Exotic Vegetables"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Zucchini",
+    "slug": "zucchini",
+    "category": "Exotic Vegetables",
+    "categorySlug": "exotic-vegetables",
+    "subcategory": "Zucchini",
+    "price": 160,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/2019-07-01_%28100%29_Hanging_leaves_of_Cucurbita_pepo_subsp._pepo_Zucchini_%28zucchini%29_at_Bichlh%C3%A4usl%2C_Tiefgrabenrotte%2C_Frankenfels%2C_Austria.jpg/960px-2019-07-01_%28100%29_Hanging_leaves_of_Cucurbita_pepo_subsp._pepo_Zucchini_%28zucchini%29_at_Bichlh%C3%A4usl%2C_Tiefgrabenrotte%2C_Frankenfels%2C_Austria.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 164,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Zucchini selected for dependable quality and everyday use.",
+    "shortDescription": "Zucchini, prepared for convenient everyday use.",
+    "originalPrice": 179,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Zucchini"
+      },
+      {
+        "label": "Category",
+        "value": "Exotic Vegetables"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Bell Pepper (Capsicum)",
+    "slug": "bell-pepper",
+    "category": "Exotic Vegetables",
+    "categorySlug": "exotic-vegetables",
+    "subcategory": "Bell Pepper",
+    "price": 160,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Baby_Bell_pepper_%27%27Capsicum_annuum%27%27_.jpg/960px-Baby_Bell_pepper_%27%27Capsicum_annuum%27%27_.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 181,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Bell Pepper (Capsicum) selected for dependable quality and everyday use.",
+    "shortDescription": "Bell Pepper (Capsicum), prepared for convenient everyday use.",
+    "originalPrice": 179,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Bell Pepper (Capsicum)"
+      },
+      {
+        "label": "Category",
+        "value": "Exotic Vegetables"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Asparagus",
+    "slug": "asparagus",
+    "category": "Exotic Vegetables",
+    "categorySlug": "exotic-vegetables",
+    "subcategory": "Asparagus",
+    "price": 160,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Asparagus_soup_%28spargelsuppe%29.jpg/960px-Asparagus_soup_%28spargelsuppe%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 198,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Asparagus selected for dependable quality and everyday use.",
+    "shortDescription": "Asparagus, prepared for convenient everyday use.",
+    "originalPrice": 179,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Asparagus"
+      },
+      {
+        "label": "Category",
+        "value": "Exotic Vegetables"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Iceberg Lettuce",
+    "slug": "iceberg-lettuce",
+    "category": "Exotic Vegetables",
+    "categorySlug": "exotic-vegetables",
+    "subcategory": "Iceberg Lettuce",
+    "price": 160,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Iceberg_lettuce_%28IJssla_krop%29.jpg/960px-Iceberg_lettuce_%28IJssla_krop%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 215,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Iceberg Lettuce selected for dependable quality and everyday use.",
+    "shortDescription": "Iceberg Lettuce, prepared for convenient everyday use.",
+    "originalPrice": 179,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Iceberg Lettuce"
+      },
+      {
+        "label": "Category",
+        "value": "Exotic Vegetables"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Organic Turmeric",
+    "slug": "organic-turmeric",
+    "category": "Organic Products",
+    "categorySlug": "organic-products",
+    "subcategory": "Organic Turmeric",
+    "price": 190,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Organic_Raw_Turmeric_02.jpg/960px-Organic_Raw_Turmeric_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 232,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Organic Turmeric selected for dependable quality and everyday use.",
+    "shortDescription": "Organic Turmeric, prepared for convenient everyday use.",
+    "originalPrice": 213,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Organic Turmeric"
+      },
+      {
+        "label": "Category",
+        "value": "Organic Products"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Organic Jaggery",
+    "slug": "organic-jaggery",
+    "category": "Organic Products",
+    "categorySlug": "organic-products",
+    "subcategory": "Organic Jaggery",
+    "price": 190,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Organic_palm_jaggery.jpg/960px-Organic_palm_jaggery.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 249,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Organic Jaggery selected for dependable quality and everyday use.",
+    "shortDescription": "Organic Jaggery, prepared for convenient everyday use.",
+    "originalPrice": 213,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Organic Jaggery"
+      },
+      {
+        "label": "Category",
+        "value": "Organic Products"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Organic Honey",
+    "slug": "organic-honey",
+    "category": "Organic Products",
+    "categorySlug": "organic-products",
+    "subcategory": "Organic Honey",
+    "price": 190,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Organic_Honey.jpg/960px-Organic_Honey.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 266,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Organic Honey selected for dependable quality and everyday use.",
+    "shortDescription": "Organic Honey, prepared for convenient everyday use.",
+    "originalPrice": 213,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Organic Honey"
+      },
+      {
+        "label": "Category",
+        "value": "Organic Products"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Organic Brown Rice",
+    "slug": "organic-brown-rice",
+    "category": "Organic Products",
+    "categorySlug": "organic-products",
+    "subcategory": "Organic Brown Rice",
+    "price": 190,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Organic_brown_rice%2C_pork%2C_kim_chi%2C_fried_egg_%288533213828%29.jpg/960px-Organic_brown_rice%2C_pork%2C_kim_chi%2C_fried_egg_%288533213828%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 43,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Organic Brown Rice selected for dependable quality and everyday use.",
+    "shortDescription": "Organic Brown Rice, prepared for convenient everyday use.",
+    "originalPrice": 213,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Organic Brown Rice"
+      },
+      {
+        "label": "Category",
+        "value": "Organic Products"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Organic Moong Dal",
+    "slug": "organic-moong-dal",
+    "category": "Organic Products",
+    "categorySlug": "organic-products",
+    "subcategory": "Organic Moong Dal",
+    "price": 190,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Mung_beans_%28Vigna_radiata%29.jpg/960px-Mung_beans_%28Vigna_radiata%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 60,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Organic Moong Dal selected for dependable quality and everyday use.",
+    "shortDescription": "Organic Moong Dal, prepared for convenient everyday use.",
+    "originalPrice": 213,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Organic Moong Dal"
+      },
+      {
+        "label": "Category",
+        "value": "Organic Products"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Basmati Rice",
+    "slug": "basmati-rice",
+    "category": "Rice",
+    "categorySlug": "rice",
+    "subcategory": "Basmati Rice",
+    "price": 130,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Grano_de_arroz_basmati_integral%2C_2020-06-12%2C_DD_01-11_FS.jpg/960px-Grano_de_arroz_basmati_integral%2C_2020-06-12%2C_DD_01-11_FS.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 77,
+    "availability": "low-stock",
+    "featured": false,
+    "description": "Basmati Rice selected for dependable quality and everyday use.",
+    "shortDescription": "Basmati Rice, prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Basmati Rice"
+      },
+      {
+        "label": "Category",
+        "value": "Rice"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Sona Masoori Rice",
+    "slug": "sona-masoori-rice",
+    "category": "Rice",
+    "categorySlug": "rice",
+    "subcategory": "Sona Masoori Rice",
+    "price": 130,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Sona-masuri.jpg/960px-Sona-masuri.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 94,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Sona Masoori Rice selected for dependable quality and everyday use.",
+    "shortDescription": "Sona Masoori Rice, prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Sona Masoori Rice"
+      },
+      {
+        "label": "Category",
+        "value": "Rice"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Brown Rice",
+    "slug": "brown-rice",
+    "category": "Rice",
+    "categorySlug": "rice",
+    "subcategory": "Brown Rice",
+    "price": 130,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Brown_Rice.jpg/960px-Brown_Rice.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 111,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Brown Rice selected for dependable quality and everyday use.",
+    "shortDescription": "Brown Rice, prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Brown Rice"
+      },
+      {
+        "label": "Category",
+        "value": "Rice"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Kolam Rice",
+    "slug": "kolam-rice",
+    "category": "Rice",
+    "categorySlug": "rice",
+    "subcategory": "Kolam Rice",
+    "price": 130,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Kolam_Pongal_1stMain_Uthandi_Jan23_A7C_04891.jpg/960px-Kolam_Pongal_1stMain_Uthandi_Jan23_A7C_04891.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 128,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Kolam Rice selected for dependable quality and everyday use.",
+    "shortDescription": "Kolam Rice, prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Kolam Rice"
+      },
+      {
+        "label": "Category",
+        "value": "Rice"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Whole Wheat Grain",
+    "slug": "whole-wheat-grain",
+    "category": "Wheat",
+    "categorySlug": "wheat",
+    "subcategory": "Whole Wheat Grain",
+    "price": 95,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Wheat_close-up.JPG/960px-Wheat_close-up.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 145,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Whole Wheat Grain selected for dependable quality and everyday use.",
+    "shortDescription": "Whole Wheat Grain, prepared for convenient everyday use.",
+    "originalPrice": 106,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Whole Wheat Grain"
+      },
+      {
+        "label": "Category",
+        "value": "Wheat"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Sharbati Wheat",
+    "slug": "sharbati-wheat",
+    "category": "Wheat",
+    "categorySlug": "wheat",
+    "subcategory": "Sharbati Wheat",
+    "price": 95,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/The_combine_Claas_Lexion_584_in_the_wheat_harvest.jpg/960px-The_combine_Claas_Lexion_584_in_the_wheat_harvest.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 162,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Sharbati Wheat selected for dependable quality and everyday use.",
+    "shortDescription": "Sharbati Wheat, prepared for convenient everyday use.",
+    "originalPrice": 106,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Sharbati Wheat"
+      },
+      {
+        "label": "Category",
+        "value": "Wheat"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Lokwan Wheat",
+    "slug": "lokwan-wheat",
+    "category": "Wheat",
+    "categorySlug": "wheat",
+    "subcategory": "Lokwan Wheat",
+    "price": 95,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Unload_wheat_by_the_combine_Claas_Lexion_584.jpg/960px-Unload_wheat_by_the_combine_Claas_Lexion_584.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 179,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Lokwan Wheat selected for dependable quality and everyday use.",
+    "shortDescription": "Lokwan Wheat, prepared for convenient everyday use.",
+    "originalPrice": 106,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Lokwan Wheat"
+      },
+      {
+        "label": "Category",
+        "value": "Wheat"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Toor Dal",
+    "slug": "toor-dal",
+    "category": "Pulses",
+    "categorySlug": "pulses",
+    "subcategory": "Toor Dal",
+    "price": 125,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Toor_dal_pakodas.JPG/960px-Toor_dal_pakodas.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 196,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Toor Dal selected for dependable quality and everyday use.",
+    "shortDescription": "Toor Dal, prepared for convenient everyday use.",
+    "originalPrice": 140,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Toor Dal"
+      },
+      {
+        "label": "Category",
+        "value": "Pulses"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Moong Dal",
+    "slug": "moong-dal",
+    "category": "Pulses",
+    "categorySlug": "pulses",
+    "subcategory": "Moong Dal",
+    "price": 125,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Green_Moong_Dal.jpg/960px-Green_Moong_Dal.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 213,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Moong Dal selected for dependable quality and everyday use.",
+    "shortDescription": "Moong Dal, prepared for convenient everyday use.",
+    "originalPrice": 140,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Moong Dal"
+      },
+      {
+        "label": "Category",
+        "value": "Pulses"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Chana Dal",
+    "slug": "chana-dal",
+    "category": "Pulses",
+    "categorySlug": "pulses",
+    "subcategory": "Chana Dal",
+    "price": 125,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Chana_Ko_Dal.jpg/960px-Chana_Ko_Dal.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 230,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Chana Dal selected for dependable quality and everyday use.",
+    "shortDescription": "Chana Dal, prepared for convenient everyday use.",
+    "originalPrice": 140,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Chana Dal"
+      },
+      {
+        "label": "Category",
+        "value": "Pulses"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Masoor Dal",
+    "slug": "masoor-dal",
+    "category": "Pulses",
+    "categorySlug": "pulses",
+    "subcategory": "Masoor Dal",
+    "price": 125,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/72/MASOOR_DAL_KEBAB.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "rating": 4.9,
+    "reviewCount": 247,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Masoor Dal selected for dependable quality and everyday use.",
+    "shortDescription": "Masoor Dal, prepared for convenient everyday use.",
+    "originalPrice": 140,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Masoor Dal"
+      },
+      {
+        "label": "Category",
+        "value": "Pulses"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Urad Dal",
+    "slug": "urad-dal",
+    "category": "Pulses",
+    "categorySlug": "pulses",
+    "subcategory": "Urad Dal",
+    "price": 125,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Healthy_-_White_Urad_Dal_Laddu.jpeg/960px-Healthy_-_White_Urad_Dal_Laddu.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 264,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Urad Dal selected for dependable quality and everyday use.",
+    "shortDescription": "Urad Dal, prepared for convenient everyday use.",
+    "originalPrice": 140,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Urad Dal"
+      },
+      {
+        "label": "Category",
+        "value": "Pulses"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Turmeric Powder",
+    "slug": "turmeric-powder",
+    "category": "Spices",
+    "categorySlug": "spices",
+    "subcategory": "Turmeric Powder",
+    "price": 95,
+    "unit": "200g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Turmeric_Powder_on_a_Spoon_-_Black_Background.jpg/960px-Turmeric_Powder_on_a_Spoon_-_Black_Background.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 41,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Turmeric Powder selected for dependable quality and everyday use.",
+    "shortDescription": "Turmeric Powder, prepared for convenient everyday use.",
+    "originalPrice": 106,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Turmeric Powder"
+      },
+      {
+        "label": "Category",
+        "value": "Spices"
+      },
+      {
+        "label": "Pack size",
+        "value": "200g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Red Chilli Powder",
+    "slug": "red-chilli-powder",
+    "category": "Spices",
+    "categorySlug": "spices",
+    "subcategory": "Red Chilli Powder",
+    "price": 95,
+    "unit": "200g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Citrus_medica_mixed_with_salt%2C_sugar%2C_green_chillies_and_red_chilli_powder_during_winter_04.jpg/960px-Citrus_medica_mixed_with_salt%2C_sugar%2C_green_chillies_and_red_chilli_powder_during_winter_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 58,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Red Chilli Powder selected for dependable quality and everyday use.",
+    "shortDescription": "Red Chilli Powder, prepared for convenient everyday use.",
+    "originalPrice": 106,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Red Chilli Powder"
+      },
+      {
+        "label": "Category",
+        "value": "Spices"
+      },
+      {
+        "label": "Pack size",
+        "value": "200g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Coriander Powder",
+    "slug": "coriander-powder",
+    "category": "Spices",
+    "categorySlug": "spices",
+    "subcategory": "Coriander Powder",
+    "price": 95,
+    "unit": "200g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Chlorofeel_Spices_Turmeric%2C_Coriander_and_Cumin_Powder_Packet.jpg/960px-Chlorofeel_Spices_Turmeric%2C_Coriander_and_Cumin_Powder_Packet.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 75,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Coriander Powder selected for dependable quality and everyday use.",
+    "shortDescription": "Coriander Powder, prepared for convenient everyday use.",
+    "originalPrice": 106,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Coriander Powder"
+      },
+      {
+        "label": "Category",
+        "value": "Spices"
+      },
+      {
+        "label": "Pack size",
+        "value": "200g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Garam Masala",
+    "slug": "garam-masala",
+    "category": "Spices",
+    "categorySlug": "spices",
+    "subcategory": "Garam Masala",
+    "price": 95,
+    "unit": "200g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Garam_Masala_1.jpg/960px-Garam_Masala_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 92,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Garam Masala selected for dependable quality and everyday use.",
+    "shortDescription": "Garam Masala, prepared for convenient everyday use.",
+    "originalPrice": 106,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Garam Masala"
+      },
+      {
+        "label": "Category",
+        "value": "Spices"
+      },
+      {
+        "label": "Pack size",
+        "value": "200g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Cumin Seeds",
+    "slug": "cumin-seeds",
+    "category": "Spices",
+    "categorySlug": "spices",
+    "subcategory": "Cumin Seeds",
+    "price": 95,
+    "unit": "200g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Lidded_basket_with_cumin_seeds_and_fruits_Vegetable_fibers%2C_organic_remains_-_Museo_Egizio_Turin_S_8415_p02.jpg/960px-Lidded_basket_with_cumin_seeds_and_fruits_Vegetable_fibers%2C_organic_remains_-_Museo_Egizio_Turin_S_8415_p02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 109,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Cumin Seeds selected for dependable quality and everyday use.",
+    "shortDescription": "Cumin Seeds, prepared for convenient everyday use.",
+    "originalPrice": 106,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Cumin Seeds"
+      },
+      {
+        "label": "Category",
+        "value": "Spices"
+      },
+      {
+        "label": "Pack size",
+        "value": "200g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Black Pepper",
+    "slug": "black-pepper",
+    "category": "Spices",
+    "categorySlug": "spices",
+    "subcategory": "Black Pepper",
+    "price": 95,
+    "unit": "200g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Black_Pepper_%28Piper_nigrum%29_fruits.jpg/960px-Black_Pepper_%28Piper_nigrum%29_fruits.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 126,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Black Pepper selected for dependable quality and everyday use.",
+    "shortDescription": "Black Pepper, prepared for convenient everyday use.",
+    "originalPrice": 106,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Black Pepper"
+      },
+      {
+        "label": "Category",
+        "value": "Spices"
+      },
+      {
+        "label": "Pack size",
+        "value": "200g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Wheat Atta",
+    "slug": "wheat-atta",
+    "category": "Flour",
+    "categorySlug": "flour",
+    "subcategory": "Wheat Atta",
+    "price": 90,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Atta_flour.jpg/960px-Atta_flour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 143,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Wheat Atta selected for dependable quality and everyday use.",
+    "shortDescription": "Wheat Atta, prepared for convenient everyday use.",
+    "originalPrice": 101,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Wheat Atta"
+      },
+      {
+        "label": "Category",
+        "value": "Flour"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "name": "Besan (Gram Flour)",
+    "slug": "besan",
+    "category": "Flour",
+    "categorySlug": "flour",
+    "subcategory": "Besan",
+    "price": 90,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Besan_%28juny_2013%29_-_panoramio.jpg/960px-Besan_%28juny_2013%29_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 160,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Besan (Gram Flour) selected for dependable quality and everyday use.",
+    "shortDescription": "Besan (Gram Flour), prepared for convenient everyday use.",
+    "originalPrice": 101,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Besan (Gram Flour)"
+      },
+      {
+        "label": "Category",
+        "value": "Flour"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "name": "Rice Flour",
+    "slug": "rice-flour",
+    "category": "Flour",
+    "categorySlug": "flour",
+    "subcategory": "Rice Flour",
+    "price": 90,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/19/Two_kinds_of_rice_flour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "rating": 4.7,
+    "reviewCount": 177,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Rice Flour selected for dependable quality and everyday use.",
+    "shortDescription": "Rice Flour, prepared for convenient everyday use.",
+    "originalPrice": 101,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Rice Flour"
+      },
+      {
+        "label": "Category",
+        "value": "Flour"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "name": "Maida (Refined Flour)",
+    "slug": "maida",
+    "category": "Flour",
+    "categorySlug": "flour",
+    "subcategory": "Maida",
+    "price": 90,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/12/Maida_arch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "rating": 4.8,
+    "reviewCount": 194,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Maida (Refined Flour) selected for dependable quality and everyday use.",
+    "shortDescription": "Maida (Refined Flour), prepared for convenient everyday use.",
+    "originalPrice": 101,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Maida (Refined Flour)"
+      },
+      {
+        "label": "Category",
+        "value": "Flour"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "name": "Sunflower Oil",
+    "slug": "sunflower-oil",
+    "category": "Cooking Oils",
+    "categorySlug": "cooking-oils",
+    "subcategory": "Sunflower Oil",
+    "price": 210,
+    "unit": "1L",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Sunflower_oil_and_sunflower.jpg/960px-Sunflower_oil_and_sunflower.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 211,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Sunflower Oil selected for dependable quality and everyday use.",
+    "shortDescription": "Sunflower Oil, prepared for convenient everyday use.",
+    "originalPrice": 235,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Sunflower Oil"
+      },
+      {
+        "label": "Category",
+        "value": "Cooking Oils"
+      },
+      {
+        "label": "Pack size",
+        "value": "1L"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "name": "Groundnut Oil",
+    "slug": "groundnut-oil",
+    "category": "Cooking Oils",
+    "categorySlug": "cooking-oils",
+    "subcategory": "Groundnut Oil",
+    "price": 210,
+    "unit": "1L",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Groundnut_oil_production%2C_2021.png/960px-Groundnut_oil_production%2C_2021.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 228,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Groundnut Oil selected for dependable quality and everyday use.",
+    "shortDescription": "Groundnut Oil, prepared for convenient everyday use.",
+    "originalPrice": 235,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Groundnut Oil"
+      },
+      {
+        "label": "Category",
+        "value": "Cooking Oils"
+      },
+      {
+        "label": "Pack size",
+        "value": "1L"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "name": "Mustard Oil",
+    "slug": "mustard-oil",
+    "category": "Cooking Oils",
+    "categorySlug": "cooking-oils",
+    "subcategory": "Mustard Oil",
+    "price": 210,
+    "unit": "1L",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Mustard_Oil_%26_Seeds_-_Kolkata_2003-10-31_00537.JPG/960px-Mustard_Oil_%26_Seeds_-_Kolkata_2003-10-31_00537.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 245,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Mustard Oil selected for dependable quality and everyday use.",
+    "shortDescription": "Mustard Oil, prepared for convenient everyday use.",
+    "originalPrice": 235,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Mustard Oil"
+      },
+      {
+        "label": "Category",
+        "value": "Cooking Oils"
+      },
+      {
+        "label": "Pack size",
+        "value": "1L"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "name": "Coconut Oil",
+    "slug": "coconut-oil",
+    "category": "Cooking Oils",
+    "categorySlug": "cooking-oils",
+    "subcategory": "Coconut Oil",
+    "price": 210,
+    "unit": "1L",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Coconut_oil_2.jpg/960px-Coconut_oil_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 262,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Coconut Oil selected for dependable quality and everyday use.",
+    "shortDescription": "Coconut Oil, prepared for convenient everyday use.",
+    "originalPrice": 235,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Coconut Oil"
+      },
+      {
+        "label": "Category",
+        "value": "Cooking Oils"
+      },
+      {
+        "label": "Pack size",
+        "value": "1L"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "name": "Milk",
+    "slug": "milk",
+    "category": "Dairy",
+    "categorySlug": "dairy",
+    "subcategory": "Milk",
+    "price": 130,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Casein_%28_Milk_Protein%29_Precipitation.jpg/960px-Casein_%28_Milk_Protein%29_Precipitation.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 39,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Milk selected for dependable quality and everyday use.",
+    "shortDescription": "Milk, prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Milk"
+      },
+      {
+        "label": "Category",
+        "value": "Dairy"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Paneer",
+    "slug": "paneer",
+    "category": "Dairy",
+    "categorySlug": "dairy",
+    "subcategory": "Paneer",
+    "price": 130,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Panir_Paneer_Indian_cheese_fresh.jpg/960px-Panir_Paneer_Indian_cheese_fresh.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 56,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Paneer selected for dependable quality and everyday use.",
+    "shortDescription": "Paneer, prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Paneer"
+      },
+      {
+        "label": "Category",
+        "value": "Dairy"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "name": "Curd (Dahi)",
+    "slug": "curd",
+    "category": "Dairy",
+    "categorySlug": "dairy",
+    "subcategory": "Curd",
+    "price": 130,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Curd_Setting.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "rating": 4.9,
+    "reviewCount": 73,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Curd (Dahi) selected for dependable quality and everyday use.",
+    "shortDescription": "Curd (Dahi), prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Curd (Dahi)"
+      },
+      {
+        "label": "Category",
+        "value": "Dairy"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "name": "Butter",
+    "slug": "butter",
+    "category": "Dairy",
+    "categorySlug": "dairy",
+    "subcategory": "Butter",
+    "price": 130,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Antoine_Vollon_-_Mound_of_Butter_-_National_Gallery_of_Art.jpg/960px-Antoine_Vollon_-_Mound_of_Butter_-_National_Gallery_of_Art.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 90,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Butter selected for dependable quality and everyday use.",
+    "shortDescription": "Butter, prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Butter"
+      },
+      {
+        "label": "Category",
+        "value": "Dairy"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "name": "Ghee",
+    "slug": "ghee",
+    "category": "Dairy",
+    "categorySlug": "dairy",
+    "subcategory": "Ghee",
+    "price": 130,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Ghee_2.jpg/960px-Ghee_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 107,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Ghee selected for dependable quality and everyday use.",
+    "shortDescription": "Ghee, prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Ghee"
+      },
+      {
+        "label": "Category",
+        "value": "Dairy"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "name": "Bread",
+    "slug": "bread",
+    "category": "Bakery",
+    "categorySlug": "bakery",
+    "subcategory": "Bread",
+    "price": 110,
+    "unit": "400g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Home_made_sour_dough_bread.jpg/960px-Home_made_sour_dough_bread.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 124,
+    "availability": "low-stock",
+    "featured": false,
+    "description": "Bread selected for dependable quality and everyday use.",
+    "shortDescription": "Bread, prepared for convenient everyday use.",
+    "originalPrice": 123,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Bread"
+      },
+      {
+        "label": "Category",
+        "value": "Bakery"
+      },
+      {
+        "label": "Pack size",
+        "value": "400g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "name": "Buns",
+    "slug": "buns",
+    "category": "Bakery",
+    "categorySlug": "bakery",
+    "subcategory": "Buns",
+    "price": 110,
+    "unit": "400g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/CrunchyBuns.JPG/960px-CrunchyBuns.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 141,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Buns selected for dependable quality and everyday use.",
+    "shortDescription": "Buns, prepared for convenient everyday use.",
+    "originalPrice": 123,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Buns"
+      },
+      {
+        "label": "Category",
+        "value": "Bakery"
+      },
+      {
+        "label": "Pack size",
+        "value": "400g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "name": "Cookies",
+    "slug": "cookies",
+    "category": "Bakery",
+    "categorySlug": "bakery",
+    "subcategory": "Cookies",
+    "price": 110,
+    "unit": "400g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Illuminated_wooden_shelf_with_many_glass_jars_containing_cookies_for_sale_in_Tokyo.jpg/960px-Illuminated_wooden_shelf_with_many_glass_jars_containing_cookies_for_sale_in_Tokyo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 158,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Cookies selected for dependable quality and everyday use.",
+    "shortDescription": "Cookies, prepared for convenient everyday use.",
+    "originalPrice": 123,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Cookies"
+      },
+      {
+        "label": "Category",
+        "value": "Bakery"
+      },
+      {
+        "label": "Pack size",
+        "value": "400g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "name": "Rusk",
+    "slug": "rusk",
+    "category": "Bakery",
+    "categorySlug": "bakery",
+    "subcategory": "Rusk",
+    "price": 110,
+    "unit": "400g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Dean_Rusk%2C_Lyndon_B._Johnson_and_Robert_McNamara_in_Cabinet_Room_meeting_February_1968.jpg/960px-Dean_Rusk%2C_Lyndon_B._Johnson_and_Robert_McNamara_in_Cabinet_Room_meeting_February_1968.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 175,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Rusk selected for dependable quality and everyday use.",
+    "shortDescription": "Rusk, prepared for convenient everyday use.",
+    "originalPrice": 123,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Rusk"
+      },
+      {
+        "label": "Category",
+        "value": "Bakery"
+      },
+      {
+        "label": "Pack size",
+        "value": "400g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "name": "Sugar",
+    "slug": "sugar",
+    "category": "Grocery",
+    "categorySlug": "grocery",
+    "subcategory": "Sugar",
+    "price": 100,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/The_Sugar_Land_Refinery.jpg/960px-The_Sugar_Land_Refinery.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 192,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Sugar selected for dependable quality and everyday use.",
+    "shortDescription": "Sugar, prepared for convenient everyday use.",
+    "originalPrice": 112,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Sugar"
+      },
+      {
+        "label": "Category",
+        "value": "Grocery"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "name": "Salt",
+    "slug": "salt",
+    "category": "Grocery",
+    "categorySlug": "grocery",
+    "subcategory": "Salt",
+    "price": 100,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Marakkanam_Salt_Pans.JPG/960px-Marakkanam_Salt_Pans.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 209,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Salt selected for dependable quality and everyday use.",
+    "shortDescription": "Salt, prepared for convenient everyday use.",
+    "originalPrice": 112,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Salt"
+      },
+      {
+        "label": "Category",
+        "value": "Grocery"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "name": "Tea Powder",
+    "slug": "tea-powder",
+    "category": "Grocery",
+    "categorySlug": "grocery",
+    "subcategory": "Tea Powder",
+    "price": 100,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Tea_egg_with_roasted_red_pepper_hummus_and_chili_powder_-_Massachusetts.jpg/960px-Tea_egg_with_roasted_red_pepper_hummus_and_chili_powder_-_Massachusetts.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 226,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Tea Powder selected for dependable quality and everyday use.",
+    "shortDescription": "Tea Powder, prepared for convenient everyday use.",
+    "originalPrice": 112,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Tea Powder"
+      },
+      {
+        "label": "Category",
+        "value": "Grocery"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "name": "Coffee Powder",
+    "slug": "coffee-powder",
+    "category": "Grocery",
+    "categorySlug": "grocery",
+    "subcategory": "Coffee Powder",
+    "price": 100,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Coffee_powdered.jpg/960px-Coffee_powdered.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 243,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Coffee Powder selected for dependable quality and everyday use.",
+    "shortDescription": "Coffee Powder, prepared for convenient everyday use.",
+    "originalPrice": 112,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Coffee Powder"
+      },
+      {
+        "label": "Category",
+        "value": "Grocery"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "name": "Poha",
+    "slug": "poha",
+    "category": "Grocery",
+    "categorySlug": "grocery",
+    "subcategory": "Poha",
+    "price": 100,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Poha_with_tomato_sause.jpg/960px-Poha_with_tomato_sause.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 260,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Poha selected for dependable quality and everyday use.",
+    "shortDescription": "Poha, prepared for convenient everyday use.",
+    "originalPrice": 112,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Poha"
+      },
+      {
+        "label": "Category",
+        "value": "Grocery"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "name": "Almonds",
+    "slug": "almonds",
+    "category": "Dry Fruits",
+    "categorySlug": "dry-fruits",
+    "subcategory": "Almonds",
+    "price": 420,
+    "unit": "250g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Almonds_-_in_shell%2C_shell_cracked_open%2C_shelled%2C_blanched.jpg/960px-Almonds_-_in_shell%2C_shell_cracked_open%2C_shelled%2C_blanched.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 37,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Almonds selected for dependable quality and everyday use.",
+    "shortDescription": "Almonds, prepared for convenient everyday use.",
+    "originalPrice": 470,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Almonds"
+      },
+      {
+        "label": "Category",
+        "value": "Dry Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "250g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "name": "Cashews",
+    "slug": "cashews",
+    "category": "Dry Fruits",
+    "categorySlug": "dry-fruits",
+    "subcategory": "Cashews",
+    "price": 420,
+    "unit": "250g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Cashews_and_Raisins_in_hand%2C_in_West_Bengal%2C_India.jpg/960px-Cashews_and_Raisins_in_hand%2C_in_West_Bengal%2C_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 54,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Cashews selected for dependable quality and everyday use.",
+    "shortDescription": "Cashews, prepared for convenient everyday use.",
+    "originalPrice": 470,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Cashews"
+      },
+      {
+        "label": "Category",
+        "value": "Dry Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "250g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "name": "Raisins",
+    "slug": "raisins",
+    "category": "Dry Fruits",
+    "categorySlug": "dry-fruits",
+    "subcategory": "Raisins",
+    "price": 420,
+    "unit": "250g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Raisins_01.jpg/960px-Raisins_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 71,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Raisins selected for dependable quality and everyday use.",
+    "shortDescription": "Raisins, prepared for convenient everyday use.",
+    "originalPrice": 470,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Raisins"
+      },
+      {
+        "label": "Category",
+        "value": "Dry Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "250g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "name": "Pistachios",
+    "slug": "pistachios",
+    "category": "Dry Fruits",
+    "categorySlug": "dry-fruits",
+    "subcategory": "Pistachios",
+    "price": 420,
+    "unit": "250g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Pistachios_in_Coalinga_-_September_2023_-_Sarah_Stierch_03.jpg/960px-Pistachios_in_Coalinga_-_September_2023_-_Sarah_Stierch_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 88,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Pistachios selected for dependable quality and everyday use.",
+    "shortDescription": "Pistachios, prepared for convenient everyday use.",
+    "originalPrice": 470,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Pistachios"
+      },
+      {
+        "label": "Category",
+        "value": "Dry Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "250g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "name": "Walnuts",
+    "slug": "walnuts",
+    "category": "Dry Fruits",
+    "categorySlug": "dry-fruits",
+    "subcategory": "Walnuts",
+    "price": 420,
+    "unit": "250g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Walnuts_-_whole_and_open_with_halved_kernel.jpg/960px-Walnuts_-_whole_and_open_with_halved_kernel.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 105,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Walnuts selected for dependable quality and everyday use.",
+    "shortDescription": "Walnuts, prepared for convenient everyday use.",
+    "originalPrice": 470,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Walnuts"
+      },
+      {
+        "label": "Category",
+        "value": "Dry Fruits"
+      },
+      {
+        "label": "Pack size",
+        "value": "250g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "name": "Mint (Pudina)",
+    "slug": "mint",
+    "category": "Herbs",
+    "categorySlug": "herbs",
+    "subcategory": "Mint",
+    "price": 55,
+    "unit": "100g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Mint_leaves_%28Mentha_spicata%29.jpg/960px-Mint_leaves_%28Mentha_spicata%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 122,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Mint (Pudina) selected for dependable quality and everyday use.",
+    "shortDescription": "Mint (Pudina), prepared for convenient everyday use.",
+    "originalPrice": 65,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Mint (Pudina)"
+      },
+      {
+        "label": "Category",
+        "value": "Herbs"
+      },
+      {
+        "label": "Pack size",
+        "value": "100g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "name": "Coriander Leaves",
+    "slug": "coriander-leaves",
+    "category": "Herbs",
+    "categorySlug": "herbs",
+    "subcategory": "Coriander Leaves",
+    "price": 55,
+    "unit": "100g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Coriander_Leaves.jpg/960px-Coriander_Leaves.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 139,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Coriander Leaves selected for dependable quality and everyday use.",
+    "shortDescription": "Coriander Leaves, prepared for convenient everyday use.",
+    "originalPrice": 65,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Coriander Leaves"
+      },
+      {
+        "label": "Category",
+        "value": "Herbs"
+      },
+      {
+        "label": "Pack size",
+        "value": "100g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "name": "Curry Leaves",
+    "slug": "curry-leaves",
+    "category": "Herbs",
+    "categorySlug": "herbs",
+    "subcategory": "Curry Leaves",
+    "price": 55,
+    "unit": "100g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/%27Narasingha_Paat%27_or_Curry_leaves%2C_Scientific_Name-_Murraya_koenigii.jpg/960px-%27Narasingha_Paat%27_or_Curry_leaves%2C_Scientific_Name-_Murraya_koenigii.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 156,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Curry Leaves selected for dependable quality and everyday use.",
+    "shortDescription": "Curry Leaves, prepared for convenient everyday use.",
+    "originalPrice": 65,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Curry Leaves"
+      },
+      {
+        "label": "Category",
+        "value": "Herbs"
+      },
+      {
+        "label": "Pack size",
+        "value": "100g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "name": "Basil (Tulsi)",
+    "slug": "basil",
+    "category": "Herbs",
+    "categorySlug": "herbs",
+    "subcategory": "Basil",
+    "price": 55,
+    "unit": "100g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Ocimum_Basilicum_leaf_lighted_by_the_left.jpg/960px-Ocimum_Basilicum_leaf_lighted_by_the_left.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 173,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Basil (Tulsi) selected for dependable quality and everyday use.",
+    "shortDescription": "Basil (Tulsi), prepared for convenient everyday use.",
+    "originalPrice": 65,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Basil (Tulsi)"
+      },
+      {
+        "label": "Category",
+        "value": "Herbs"
+      },
+      {
+        "label": "Pack size",
+        "value": "100g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "name": "Chia Seeds",
+    "slug": "chia-seeds",
+    "category": "Seeds",
+    "categorySlug": "seeds",
+    "subcategory": "Chia Seeds",
+    "price": 180,
+    "unit": "250g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Chia_seeds_in_a_cup.jpg/960px-Chia_seeds_in_a_cup.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 190,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Chia Seeds selected for dependable quality and everyday use.",
+    "shortDescription": "Chia Seeds, prepared for convenient everyday use.",
+    "originalPrice": 202,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Chia Seeds"
+      },
+      {
+        "label": "Category",
+        "value": "Seeds"
+      },
+      {
+        "label": "Pack size",
+        "value": "250g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "name": "Flax Seeds",
+    "slug": "flax-seeds",
+    "category": "Seeds",
+    "categorySlug": "seeds",
+    "subcategory": "Flax Seeds",
+    "price": 180,
+    "unit": "250g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Flax_seeds.jpg/960px-Flax_seeds.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 207,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Flax Seeds selected for dependable quality and everyday use.",
+    "shortDescription": "Flax Seeds, prepared for convenient everyday use.",
+    "originalPrice": 202,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Flax Seeds"
+      },
+      {
+        "label": "Category",
+        "value": "Seeds"
+      },
+      {
+        "label": "Pack size",
+        "value": "250g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "name": "Sunflower Seeds",
+    "slug": "sunflower-seeds",
+    "category": "Seeds",
+    "categorySlug": "seeds",
+    "subcategory": "Sunflower Seeds",
+    "price": 180,
+    "unit": "250g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Sunflower_with_seeds_02.jpg/960px-Sunflower_with_seeds_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 224,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Sunflower Seeds selected for dependable quality and everyday use.",
+    "shortDescription": "Sunflower Seeds, prepared for convenient everyday use.",
+    "originalPrice": 202,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Sunflower Seeds"
+      },
+      {
+        "label": "Category",
+        "value": "Seeds"
+      },
+      {
+        "label": "Pack size",
+        "value": "250g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "name": "Fruit Juice",
+    "slug": "fruit-juice",
+    "category": "Beverages",
+    "categorySlug": "beverages",
+    "subcategory": "Fruit Juice",
+    "price": 140,
+    "unit": "1L",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Orange_juice_1_edit1.jpg/960px-Orange_juice_1_edit1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 241,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Fruit Juice selected for dependable quality and everyday use.",
+    "shortDescription": "Fruit Juice, prepared for convenient everyday use.",
+    "originalPrice": 157,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Fruit Juice"
+      },
+      {
+        "label": "Category",
+        "value": "Beverages"
+      },
+      {
+        "label": "Pack size",
+        "value": "1L"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "name": "Buttermilk (Chaas)",
+    "slug": "buttermilk",
+    "category": "Beverages",
+    "categorySlug": "beverages",
+    "subcategory": "Buttermilk",
+    "price": 140,
+    "unit": "1L",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Buttermilk-%28right%29-and-Milk-%28left%29.jpg/960px-Buttermilk-%28right%29-and-Milk-%28left%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 258,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Buttermilk (Chaas) selected for dependable quality and everyday use.",
+    "shortDescription": "Buttermilk (Chaas), prepared for convenient everyday use.",
+    "originalPrice": 157,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Buttermilk (Chaas)"
+      },
+      {
+        "label": "Category",
+        "value": "Beverages"
+      },
+      {
+        "label": "Pack size",
+        "value": "1L"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "name": "Herbal Tea",
+    "slug": "herbal-tea",
+    "category": "Beverages",
+    "categorySlug": "beverages",
+    "subcategory": "Herbal Tea",
+    "price": 140,
+    "unit": "1L",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Krasnoyarsk_Stolby%2C_Herbal_tea%2C_Herbal_infusion%2C_Taiga_forest_tea%2C_Russia.jpg/960px-Krasnoyarsk_Stolby%2C_Herbal_tea%2C_Herbal_infusion%2C_Taiga_forest_tea%2C_Russia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 35,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Herbal Tea selected for dependable quality and everyday use.",
+    "shortDescription": "Herbal Tea, prepared for convenient everyday use.",
+    "originalPrice": 157,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Herbal Tea"
+      },
+      {
+        "label": "Category",
+        "value": "Beverages"
+      },
+      {
+        "label": "Pack size",
+        "value": "1L"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "name": "Coconut Water",
+    "slug": "coconut-water",
+    "category": "Beverages",
+    "categorySlug": "beverages",
+    "subcategory": "Coconut Water",
+    "price": 140,
+    "unit": "1L",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Coconut_water_vendor.jpg/960px-Coconut_water_vendor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 52,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Coconut Water selected for dependable quality and everyday use.",
+    "shortDescription": "Coconut Water, prepared for convenient everyday use.",
+    "originalPrice": 157,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Coconut Water"
+      },
+      {
+        "label": "Category",
+        "value": "Beverages"
+      },
+      {
+        "label": "Pack size",
+        "value": "1L"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "name": "Frozen Peas",
+    "slug": "frozen-peas",
+    "category": "Frozen Foods",
+    "categorySlug": "frozen-foods",
+    "subcategory": "Frozen Peas",
+    "price": 160,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/India_-_Varanasi_green_peas_-_2714.jpg/960px-India_-_Varanasi_green_peas_-_2714.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 69,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Frozen Peas selected for dependable quality and everyday use.",
+    "shortDescription": "Frozen Peas, prepared for convenient everyday use.",
+    "originalPrice": 179,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Frozen Peas"
+      },
+      {
+        "label": "Category",
+        "value": "Frozen Foods"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "name": "Frozen Corn",
+    "slug": "frozen-corn",
+    "category": "Frozen Foods",
+    "categorySlug": "frozen-foods",
+    "subcategory": "Frozen Corn",
+    "price": 160,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Sweet_corn_2.jpg/960px-Sweet_corn_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 86,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Frozen Corn selected for dependable quality and everyday use.",
+    "shortDescription": "Frozen Corn, prepared for convenient everyday use.",
+    "originalPrice": 179,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Frozen Corn"
+      },
+      {
+        "label": "Category",
+        "value": "Frozen Foods"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "name": "Frozen Paratha",
+    "slug": "frozen-paratha",
+    "category": "Frozen Foods",
+    "categorySlug": "frozen-foods",
+    "subcategory": "Frozen Paratha",
+    "price": 160,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Paratha_from_Narathiwas%2C_Thailand.jpg/960px-Paratha_from_Narathiwas%2C_Thailand.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 103,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Frozen Paratha selected for dependable quality and everyday use.",
+    "shortDescription": "Frozen Paratha, prepared for convenient everyday use.",
+    "originalPrice": 179,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Frozen Paratha"
+      },
+      {
+        "label": "Category",
+        "value": "Frozen Foods"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "name": "Frozen Mixed Vegetables",
+    "slug": "frozen-mixed-vegetables",
+    "category": "Frozen Foods",
+    "categorySlug": "frozen-foods",
+    "subcategory": "Frozen Mixed Vegetables",
+    "price": 160,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Mixed_Vegetables_-_Pad_Pad_Thai_Restaurant_2025-12-16.jpg/960px-Mixed_Vegetables_-_Pad_Pad_Thai_Restaurant_2025-12-16.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 120,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Frozen Mixed Vegetables selected for dependable quality and everyday use.",
+    "shortDescription": "Frozen Mixed Vegetables, prepared for convenient everyday use.",
+    "originalPrice": 179,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Frozen Mixed Vegetables"
+      },
+      {
+        "label": "Category",
+        "value": "Frozen Foods"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "name": "Oats",
+    "slug": "oats",
+    "category": "Health Foods",
+    "categorySlug": "health-foods",
+    "subcategory": "Oats",
+    "price": 220,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Oats_in_a_field.jpg/960px-Oats_in_a_field.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 137,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Oats selected for dependable quality and everyday use.",
+    "shortDescription": "Oats, prepared for convenient everyday use.",
+    "originalPrice": 246,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Oats"
+      },
+      {
+        "label": "Category",
+        "value": "Health Foods"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "name": "Muesli",
+    "slug": "muesli",
+    "category": "Health Foods",
+    "categorySlug": "health-foods",
+    "subcategory": "Muesli",
+    "price": 220,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Muesli.jpg/960px-Muesli.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 154,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Muesli selected for dependable quality and everyday use.",
+    "shortDescription": "Muesli, prepared for convenient everyday use.",
+    "originalPrice": 246,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Muesli"
+      },
+      {
+        "label": "Category",
+        "value": "Health Foods"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "name": "Quinoa",
+    "slug": "quinoa",
+    "category": "Health Foods",
+    "categorySlug": "health-foods",
+    "subcategory": "Quinoa",
+    "price": 220,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Chenopodium_quinoa_-red_faro-_MHNT.BOT.2007.43.66.jpg/960px-Chenopodium_quinoa_-red_faro-_MHNT.BOT.2007.43.66.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 171,
+    "availability": "low-stock",
+    "featured": false,
+    "description": "Quinoa selected for dependable quality and everyday use.",
+    "shortDescription": "Quinoa, prepared for convenient everyday use.",
+    "originalPrice": 246,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Quinoa"
+      },
+      {
+        "label": "Category",
+        "value": "Health Foods"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "name": "Ragi Flour",
+    "slug": "ragi-flour",
+    "category": "Health Foods",
+    "categorySlug": "health-foods",
+    "subcategory": "Ragi Flour",
+    "price": 220,
+    "unit": "500g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Ragi_uttapam.jpg/960px-Ragi_uttapam.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 188,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Ragi Flour selected for dependable quality and everyday use.",
+    "shortDescription": "Ragi Flour, prepared for convenient everyday use.",
+    "originalPrice": 246,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Ragi Flour"
+      },
+      {
+        "label": "Category",
+        "value": "Health Foods"
+      },
+      {
+        "label": "Pack size",
+        "value": "500g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "name": "Namkeen Mixture",
+    "slug": "namkeen-mixture",
+    "category": "Snacks",
+    "categorySlug": "snacks",
+    "subcategory": "Namkeen Mixture",
+    "price": 130,
+    "unit": "250g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Milka_Oreo_Choco-Mix_Snack_Mix_3_%2832561285135%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "rating": 4.9,
+    "reviewCount": 205,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Namkeen Mixture selected for dependable quality and everyday use.",
+    "shortDescription": "Namkeen Mixture, prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Namkeen Mixture"
+      },
+      {
+        "label": "Category",
+        "value": "Snacks"
+      },
+      {
+        "label": "Pack size",
+        "value": "250g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "name": "Banana Chips",
+    "slug": "banana-chips",
+    "category": "Snacks",
+    "categorySlug": "snacks",
+    "subcategory": "Banana Chips",
+    "price": 130,
+    "unit": "250g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Kerala_banana_chips_Upperi_varuthath.jpg/960px-Kerala_banana_chips_Upperi_varuthath.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 222,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Banana Chips selected for dependable quality and everyday use.",
+    "shortDescription": "Banana Chips, prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Banana Chips"
+      },
+      {
+        "label": "Category",
+        "value": "Snacks"
+      },
+      {
+        "label": "Pack size",
+        "value": "250g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "name": "Roasted Chana",
+    "slug": "roasted-chana",
+    "category": "Snacks",
+    "categorySlug": "snacks",
+    "subcategory": "Roasted Chana",
+    "price": 130,
+    "unit": "250g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Roasted_Chickpea_Chana_with_Salt_and_Turmeric.jpg/960px-Roasted_Chickpea_Chana_with_Salt_and_Turmeric.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 239,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Roasted Chana selected for dependable quality and everyday use.",
+    "shortDescription": "Roasted Chana, prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Roasted Chana"
+      },
+      {
+        "label": "Category",
+        "value": "Snacks"
+      },
+      {
+        "label": "Pack size",
+        "value": "250g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "name": "Sev",
+    "slug": "sev",
+    "category": "Snacks",
+    "categorySlug": "snacks",
+    "subcategory": "Sev",
+    "price": 130,
+    "unit": "250g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Sev_puri%2Cstreet_food%2Ckerala%2Cindia.jpg/960px-Sev_puri%2Cstreet_food%2Ckerala%2Cindia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 256,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Sev selected for dependable quality and everyday use.",
+    "shortDescription": "Sev, prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Sev"
+      },
+      {
+        "label": "Category",
+        "value": "Snacks"
+      },
+      {
+        "label": "Pack size",
+        "value": "250g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "name": "Bhujia",
+    "slug": "bhujia",
+    "category": "Snacks",
+    "categorySlug": "snacks",
+    "subcategory": "Bhujia",
+    "price": 130,
+    "unit": "250g",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Shop_selling_Bikaneri_bhujia_in_Jaipur.jpg/960px-Shop_selling_Bikaneri_bhujia_in_Jaipur.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 33,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Bhujia selected for dependable quality and everyday use.",
+    "shortDescription": "Bhujia, prepared for convenient everyday use.",
+    "originalPrice": 146,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Bhujia"
+      },
+      {
+        "label": "Category",
+        "value": "Snacks"
+      },
+      {
+        "label": "Pack size",
+        "value": "250g"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "name": "Dish Wash Liquid",
+    "slug": "dish-wash-liquid",
+    "category": "Household Essentials",
+    "categorySlug": "household-essentials",
+    "subcategory": "Dish Wash Liquid",
+    "price": 120,
+    "unit": "1pc",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Soap_in_blue_dish.JPG/960px-Soap_in_blue_dish.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 50,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Dish Wash Liquid selected for dependable quality and everyday use.",
+    "shortDescription": "Dish Wash Liquid, prepared for convenient everyday use.",
+    "originalPrice": 134,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Dish Wash Liquid"
+      },
+      {
+        "label": "Category",
+        "value": "Household Essentials"
+      },
+      {
+        "label": "Pack size",
+        "value": "1pc"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "name": "Matchbox",
+    "slug": "matchbox",
+    "category": "Household Essentials",
+    "categorySlug": "household-essentials",
+    "subcategory": "Matchbox",
+    "price": 120,
+    "unit": "1pc",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/68/Matchbox_window_manager_logo.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "rating": 4.9,
+    "reviewCount": 67,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Matchbox selected for dependable quality and everyday use.",
+    "shortDescription": "Matchbox, prepared for convenient everyday use.",
+    "originalPrice": 134,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Matchbox"
+      },
+      {
+        "label": "Category",
+        "value": "Household Essentials"
+      },
+      {
+        "label": "Pack size",
+        "value": "1pc"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "name": "Aluminium Foil",
+    "slug": "aluminium-foil",
+    "category": "Household Essentials",
+    "categorySlug": "household-essentials",
+    "subcategory": "Aluminium Foil",
+    "price": 120,
+    "unit": "1pc",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Aluminum_foil_1.jpg/960px-Aluminum_foil_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 84,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Aluminium Foil selected for dependable quality and everyday use.",
+    "shortDescription": "Aluminium Foil, prepared for convenient everyday use.",
+    "originalPrice": 134,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Aluminium Foil"
+      },
+      {
+        "label": "Category",
+        "value": "Household Essentials"
+      },
+      {
+        "label": "Pack size",
+        "value": "1pc"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "name": "Garbage Bags",
+    "slug": "garbage-bags",
+    "category": "Household Essentials",
+    "categorySlug": "household-essentials",
+    "subcategory": "Garbage Bags",
+    "price": 120,
+    "unit": "1pc",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Black_garbage_bag.jpg/960px-Black_garbage_bag.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 101,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Garbage Bags selected for dependable quality and everyday use.",
+    "shortDescription": "Garbage Bags, prepared for convenient everyday use.",
+    "originalPrice": 134,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Garbage Bags"
+      },
+      {
+        "label": "Category",
+        "value": "Household Essentials"
+      },
+      {
+        "label": "Pack size",
+        "value": "1pc"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "name": "Soap",
+    "slug": "soap",
+    "category": "Personal Care",
+    "categorySlug": "personal-care",
+    "subcategory": "Soap",
+    "price": 150,
+    "unit": "1pc",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Lipid_Islands_on_Soap_Bubble.jpg/960px-Lipid_Islands_on_Soap_Bubble.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 118,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Soap selected for dependable quality and everyday use.",
+    "shortDescription": "Soap, prepared for convenient everyday use.",
+    "originalPrice": 168,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Soap"
+      },
+      {
+        "label": "Category",
+        "value": "Personal Care"
+      },
+      {
+        "label": "Pack size",
+        "value": "1pc"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "name": "Shampoo",
+    "slug": "shampoo",
+    "category": "Personal Care",
+    "categorySlug": "personal-care",
+    "subcategory": "Shampoo",
+    "price": 150,
+    "unit": "1pc",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/VS_SASSON_SHAMPOO_CHINA_VERSION.jpg/960px-VS_SASSON_SHAMPOO_CHINA_VERSION.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 135,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Shampoo selected for dependable quality and everyday use.",
+    "shortDescription": "Shampoo, prepared for convenient everyday use.",
+    "originalPrice": 168,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Shampoo"
+      },
+      {
+        "label": "Category",
+        "value": "Personal Care"
+      },
+      {
+        "label": "Pack size",
+        "value": "1pc"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "name": "Toothpaste",
+    "slug": "toothpaste",
+    "category": "Personal Care",
+    "categorySlug": "personal-care",
+    "subcategory": "Toothpaste",
+    "price": 150,
+    "unit": "1pc",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Toothpasteonbrush.jpg/960px-Toothpasteonbrush.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 152,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Toothpaste selected for dependable quality and everyday use.",
+    "shortDescription": "Toothpaste, prepared for convenient everyday use.",
+    "originalPrice": 168,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Toothpaste"
+      },
+      {
+        "label": "Category",
+        "value": "Personal Care"
+      },
+      {
+        "label": "Pack size",
+        "value": "1pc"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "name": "Hand Sanitizer",
+    "slug": "hand-sanitizer",
+    "category": "Personal Care",
+    "categorySlug": "personal-care",
+    "subcategory": "Hand Sanitizer",
+    "price": 150,
+    "unit": "1pc",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Makeshift_hand_sanitizer_in_Bosnia.jpg/960px-Makeshift_hand_sanitizer_in_Bosnia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 169,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Hand Sanitizer selected for dependable quality and everyday use.",
+    "shortDescription": "Hand Sanitizer, prepared for convenient everyday use.",
+    "originalPrice": 168,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Hand Sanitizer"
+      },
+      {
+        "label": "Category",
+        "value": "Personal Care"
+      },
+      {
+        "label": "Pack size",
+        "value": "1pc"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "name": "Floor Cleaner",
+    "slug": "floor-cleaner",
+    "category": "Cleaning Products",
+    "categorySlug": "cleaning-products",
+    "subcategory": "Floor Cleaner",
+    "price": 170,
+    "unit": "1L",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Floor_cleaner.jpg/960px-Floor_cleaner.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 186,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Floor Cleaner selected for dependable quality and everyday use.",
+    "shortDescription": "Floor Cleaner, prepared for convenient everyday use.",
+    "originalPrice": 190,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Floor Cleaner"
+      },
+      {
+        "label": "Category",
+        "value": "Cleaning Products"
+      },
+      {
+        "label": "Pack size",
+        "value": "1L"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "name": "Toilet Cleaner",
+    "slug": "toilet-cleaner",
+    "category": "Cleaning Products",
+    "categorySlug": "cleaning-products",
+    "subcategory": "Toilet Cleaner",
+    "price": 170,
+    "unit": "1L",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/ToiletcleanersbyAlofok_%284%29.JPG/960px-ToiletcleanersbyAlofok_%284%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 203,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Toilet Cleaner selected for dependable quality and everyday use.",
+    "shortDescription": "Toilet Cleaner, prepared for convenient everyday use.",
+    "originalPrice": 190,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Toilet Cleaner"
+      },
+      {
+        "label": "Category",
+        "value": "Cleaning Products"
+      },
+      {
+        "label": "Pack size",
+        "value": "1L"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "name": "Detergent Powder",
+    "slug": "detergent-powder",
+    "category": "Cleaning Products",
+    "categorySlug": "cleaning-products",
+    "subcategory": "Detergent Powder",
+    "price": 170,
+    "unit": "1L",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Ghari_Detergent_1_kg_Pack.jpg/960px-Ghari_Detergent_1_kg_Pack.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 220,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Detergent Powder selected for dependable quality and everyday use.",
+    "shortDescription": "Detergent Powder, prepared for convenient everyday use.",
+    "originalPrice": 190,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Detergent Powder"
+      },
+      {
+        "label": "Category",
+        "value": "Cleaning Products"
+      },
+      {
+        "label": "Pack size",
+        "value": "1L"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "name": "Glass Cleaner",
+    "slug": "glass-cleaner",
+    "category": "Cleaning Products",
+    "categorySlug": "cleaning-products",
+    "subcategory": "Glass Cleaner",
+    "price": 170,
+    "unit": "1L",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Window_cleaner_on_Haulotte_HA15IP_lift.jpg/960px-Window_cleaner_on_Haulotte_HA15IP_lift.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.7,
+    "reviewCount": 237,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Glass Cleaner selected for dependable quality and everyday use.",
+    "shortDescription": "Glass Cleaner, prepared for convenient everyday use.",
+    "originalPrice": 190,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Glass Cleaner"
+      },
+      {
+        "label": "Category",
+        "value": "Cleaning Products"
+      },
+      {
+        "label": "Pack size",
+        "value": "1L"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "name": "Sugarcane",
+    "slug": "sugarcane",
+    "category": "Farm Produce",
+    "categorySlug": "farm-produce",
+    "subcategory": "Sugarcane",
+    "price": 110,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Cut_sugarcane.jpg/960px-Cut_sugarcane.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.8,
+    "reviewCount": 254,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Sugarcane selected for dependable quality and everyday use.",
+    "shortDescription": "Sugarcane, prepared for convenient everyday use.",
+    "originalPrice": 123,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Sugarcane"
+      },
+      {
+        "label": "Category",
+        "value": "Farm Produce"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "name": "Coconut",
+    "slug": "coconut",
+    "category": "Farm Produce",
+    "categorySlug": "farm-produce",
+    "subcategory": "Coconut",
+    "price": 110,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Coconuts_-_single_and_cracked_open.jpg/960px-Coconuts_-_single_and_cracked_open.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.9,
+    "reviewCount": 31,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Coconut selected for dependable quality and everyday use.",
+    "shortDescription": "Coconut, prepared for convenient everyday use.",
+    "originalPrice": 123,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Coconut"
+      },
+      {
+        "label": "Category",
+        "value": "Farm Produce"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 115,
+    "name": "Groundnut (Raw)",
+    "slug": "groundnut",
+    "category": "Farm Produce",
+    "categorySlug": "farm-produce",
+    "subcategory": "Groundnut",
+    "price": 110,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Groundnuts_farm.jpg/960px-Groundnuts_farm.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.4,
+    "reviewCount": 48,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Groundnut (Raw) selected for dependable quality and everyday use.",
+    "shortDescription": "Groundnut (Raw), prepared for convenient everyday use.",
+    "originalPrice": 123,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Groundnut (Raw)"
+      },
+      {
+        "label": "Category",
+        "value": "Farm Produce"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 116,
+    "name": "Maize",
+    "slug": "maize",
+    "category": "Farm Produce",
+    "categorySlug": "farm-produce",
+    "subcategory": "Maize",
+    "price": 110,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Maize_field_in_Bavaria_in_Summer_2013.JPG/960px-Maize_field_in_Bavaria_in_Summer_2013.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.5,
+    "reviewCount": 65,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Maize selected for dependable quality and everyday use.",
+    "shortDescription": "Maize, prepared for convenient everyday use.",
+    "originalPrice": 123,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Maize"
+      },
+      {
+        "label": "Category",
+        "value": "Farm Produce"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": 117,
+    "name": "Bajra",
+    "slug": "bajra",
+    "category": "Farm Produce",
+    "categorySlug": "farm-produce",
+    "subcategory": "Bajra",
+    "price": 110,
+    "unit": "1kg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Bajra_Ghar_Bajra_House_Pashupati_Area_Pashupatinath_Kathmandu_Nepal_Rajesh_Dhungana.jpg/960px-Bajra_Ghar_Bajra_House_Pashupati_Area_Pashupatinath_Kathmandu_Nepal_Rajesh_Dhungana.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "rating": 4.6,
+    "reviewCount": 82,
+    "availability": "in-stock",
+    "featured": false,
+    "description": "Bajra selected for dependable quality and everyday use.",
+    "shortDescription": "Bajra, prepared for convenient everyday use.",
+    "originalPrice": 123,
+    "features": [
+      "Product-specific selection",
+      "Checked before dispatch",
+      "Packed for everyday use"
+    ],
+    "specifications": [
+      {
+        "label": "Product",
+        "value": "Bajra"
+      },
+      {
+        "label": "Category",
+        "value": "Farm Produce"
+      },
+      {
+        "label": "Pack size",
+        "value": "1kg"
+      },
+      {
+        "label": "Image source",
+        "value": "Wikimedia Commons"
+      }
+    ]
+  }
 ];
 
-const buildProduct = (entry: CatalogEntry, index: number): Product => ({
-  ...entry,
-  id: index + 1,
-  rating: Number((4.3 + ((index * 7) % 7) / 10).toFixed(1)),
-  reviewCount: 24 + ((index * 37) % 290),
-  availability: index % 29 === 0 ? "low-stock" : "in-stock",
-  featured: index < 12 || index % 23 === 0,
-  shortDescription: `${entry.name}, selected for dependable freshness and everyday value.`,
-  originalPrice: entry.price + Math.max(8, Math.round(entry.price * 0.12)),
-  features: [
-    "Product-specific fresh selection",
-    "Carefully checked before dispatch",
-    "Suitable for everyday kitchen use",
-  ],
-  specifications: [
-    { label: "Product", value: entry.name },
-    { label: "Category", value: entry.category },
-    { label: "Pack size", value: entry.unit },
-    { label: "Selection", value: "Freshira catalogue standard" },
-  ],
-});
-
-const productSeed: Product[] = catalogEntries.map(buildProduct);
-
-export const products: Product[] = productSeed;
-
-export const featuredProducts: Product[] = products.filter((product) => product.featured);
-
-export const bestSellerProducts: Product[] = [...products]
-  .sort((a, b) => b.reviewCount - a.reviewCount)
-  .slice(0, 4);
-
-export const newArrivalProducts: Product[] = products.slice(0, 4);
-
-export const seasonalProducts: Product[] = products
-  .filter((product) => ["fresh-fruits", "fresh-vegetables"].includes(product.categorySlug))
-  .slice(0, 4);
-
-export const getProductBySlug = (slug: string): Product | undefined =>
-  products.find((product) => product.slug === slug);
-
-export const getRelatedProducts = (product: Product): Product[] =>
-  products
-    .filter((item) => item.categorySlug === product.categorySlug && item.id !== product.id)
-    .slice(0, 4);
+export const products = productSeed;
+export const featuredProducts = products.filter((product) => product.featured);
+export const bestSellerProducts = [...products].sort((a, b) => b.reviewCount - a.reviewCount).slice(0, 4);
+export const newArrivalProducts = products.slice(0, 4);
+export const seasonalProducts = products.filter((product) => ["fresh-fruits", "fresh-vegetables"].includes(product.categorySlug)).slice(0, 4);
+export const getProductBySlug = (slug: string) => products.find((product) => product.slug === slug);
+export const getRelatedProducts = (product: Product) => products.filter((item) => item.categorySlug === product.categorySlug && item.id !== product.id).slice(0, 4);
