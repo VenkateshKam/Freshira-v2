@@ -18,16 +18,18 @@ export function PolicyLayout({ eyebrow, title, summary, sections }: PolicyLayout
   const [activeSection, setActiveSection] = useState(sections[0]?.id ?? "");
 
   useEffect(() => {
-    const observers = sections.map((section) => {
+    const observers = sections.flatMap((section) => {
       const element = document.getElementById(section.id);
-      if (!element) return null;
-      return new IntersectionObserver(
+      if (!element) return [];
+      const observer = new IntersectionObserver(
         ([entry]) => entry.isIntersecting && setActiveSection(section.id),
         { rootMargin: "-24% 0px -62% 0px" },
-      ).observe(element);
+      );
+      observer.observe(element);
+      return [observer];
     });
 
-    return () => observers.forEach((observer) => observer?.disconnect());
+    return () => observers.forEach((observer) => observer.disconnect());
   }, [sections]);
 
   return (

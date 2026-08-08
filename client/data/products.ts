@@ -1,4 +1,4 @@
-﻿export interface Product {
+export interface Product {
   id: number;
   name: string;
   slug: string;
@@ -14,6 +14,10 @@
   availability: "in-stock" | "low-stock" | "out-of-stock";
   featured: boolean;
   description: string;
+  shortDescription?: string;
+  originalPrice?: number;
+  features?: string[];
+  specifications?: { label: string; value: string }[];
 }
 
 const productSeed: Product[] = [

@@ -20,13 +20,13 @@ import {
   CheckoutPage,
   ContactPage,
   FAQPage,
-  PolicyPage,
-  WishlistPage,
   ProductDetailsPage,
   ProductsPage,
   ServicesPage,
   TestimonialsPage,
 } from "./pages/FreshiraPages";
+import { PolicyPage } from "./pages/PolicyPage";
+import { WishlistPage } from "./pages/WishlistPage";
 
 const queryClient = new QueryClient();
 
