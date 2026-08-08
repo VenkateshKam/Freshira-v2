@@ -8,279 +8,208 @@ export interface Product {
   price: number;
   unit: string;
   image: string;
-  gallery?: string[];
   rating: number;
   reviewCount: number;
   availability: "in-stock" | "low-stock" | "out-of-stock";
   featured: boolean;
   description: string;
-  shortDescription?: string;
-  originalPrice?: number;
-  features?: string[];
-  specifications?: { label: string; value: string }[];
+  shortDescription: string;
+  originalPrice: number;
+  features: string[];
+  specifications: { label: string; value: string }[];
 }
 
-const productSeed: Product[] = [
-  {
-    id: 1,
-    name: "Organic Tomatoes",
-    slug: "organic-tomatoes",
-    category: "Fresh Vegetables",
-    categorySlug: "fresh-vegetables",
-    subcategory: "Tomatoes",
-    price: 45,
-    unit: "500g",
-    image: "https://images.unsplash.com/photo-1546470427-227c7369a9b7?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1546470427-227c7369a9b7?auto=format&fit=crop&w=900&q=85",
-      "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=900&q=85"
-    ],
-    rating: 4.8,
-    reviewCount: 124,
-    availability: "in-stock",
-    featured: true,
-    description: "Fresh organic tomatoes sourced directly from certified farms."
-  },
-  {
-    id: 2,
-    name: "Fresh Spinach",
-    slug: "fresh-spinach",
-    category: "Fresh Vegetables",
-    categorySlug: "fresh-vegetables",
-    subcategory: "Leafy Greens",
-    price: 35,
-    unit: "250g",
-    image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=900&q=85",
-      "https://images.unsplash.com/photo-1574316081805-47e490f009e8?auto=format&fit=crop&w=900&q=85"
-    ],
-    rating: 4.6,
-    reviewCount: 89,
-    availability: "in-stock",
-    featured: true,
-    description: "Crisp fresh spinach leaves, perfect for salads and cooking."
-  },
-  {
-    id: 3,
-    name: "Organic Apples",
-    slug: "organic-apples",
-    category: "Fresh Fruits",
-    categorySlug: "fresh-fruits",
-    subcategory: "Apples",
-    price: 180,
-    unit: "1kg",
-    image: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=900&q=85",
-      "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=900&q=85"
-    ],
-    rating: 4.9,
-    reviewCount: 256,
-    availability: "in-stock",
-    featured: true,
-    description: "Sweet and crisp organic apples, perfect for snacking."
-  },
-  {
-    id: 4,
-    name: "Basmati Rice",
-    slug: "basmati-rice",
-    category: "Rice",
-    categorySlug: "rice",
-    subcategory: "Basmati",
-    price: 120,
-    unit: "1kg",
-    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=900&q=85",
-      "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?auto=format&fit=crop&w=900&q=85"
-    ],
-    rating: 4.7,
-    reviewCount: 312,
-    availability: "in-stock",
-    featured: false,
-    description: "Premium aged basmati rice with extra-long grains."
-  },
-  {
-    id: 5,
-    name: "Organic Turmeric",
-    slug: "organic-turmeric",
-    category: "Spices",
-    categorySlug: "spices",
-    subcategory: "Ground Spices",
-    price: 85,
-    unit: "200g",
-    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=900&q=85",
-      "https://images.unsplash.com/photo-1599909533681-74471e51e5c8?auto=format&fit=crop&w=900&q=85"
-    ],
-    rating: 4.5,
-    reviewCount: 78,
-    availability: "in-stock",
-    featured: false,
-    description: "High-quality organic turmeric powder with rich color."
-  },
-  {
-    id: 6,
-    name: "Fresh Carrots",
-    slug: "fresh-carrots",
-    category: "Fresh Vegetables",
-    categorySlug: "fresh-vegetables",
-    subcategory: "Root Vegetables",
-    price: 40,
-    unit: "500g",
-    image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=900&q=85",
-      "https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&w=900&q=85"
-    ],
-    rating: 4.4,
-    reviewCount: 92,
-    availability: "in-stock",
-    featured: false,
-    description: "Crunchy fresh carrots, perfect for salads and cooking."
-  },
-  {
-    id: 7,
-    name: "Almonds",
-    slug: "almonds",
-    category: "Dry Fruits",
-    categorySlug: "dry-fruits",
-    subcategory: "Nuts",
-    price: 450,
-    unit: "500g",
-    image: "https://images.unsplash.com/photo-1508061253366-f7da158b8d46?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1508061253366-f7da158b8d46?auto=format&fit=crop&w=900&q=85",
-      "https://images.unsplash.com/photo-1578184697930-3bed1b0ab9c9?auto=format&fit=crop&w=900&q=85"
-    ],
-    rating: 4.8,
-    reviewCount: 167,
-    availability: "in-stock",
-    featured: true,
-    description: "Premium California almonds, rich and crunchy."
-  },
-  {
-    id: 8,
-    name: "Whole Wheat Flour",
-    slug: "whole-wheat-flour",
-    category: "Flour",
-    categorySlug: "flour",
-    subcategory: "Wheat Flour",
-    price: 65,
-    unit: "1kg",
-    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85",
-      "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=900&q=85"
-    ],
-    rating: 4.6,
-    reviewCount: 143,
-    availability: "in-stock",
-    featured: false,
-    description: "Stone-ground whole wheat flour for healthy cooking."
-  },
-  {
-    id: 9,
-    name: "Organic Honey",
-    slug: "organic-honey",
-    category: "Grocery",
-    categorySlug: "grocery",
-    subcategory: "Sweeteners",
-    price: 280,
-    unit: "500g",
-    image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=900&q=85",
-      "https://images.unsplash.com/photo-1622423325354-a7e7e1c6d5d1?auto=format&fit=crop&w=900&q=85"
-    ],
-    rating: 4.9,
-    reviewCount: 201,
-    availability: "in-stock",
-    featured: true,
-    description: "Pure organic honey from wild flowers."
-  },
-  {
-    id: 10,
-    name: "Fresh Oranges",
-    slug: "fresh-oranges",
-    category: "Fresh Fruits",
-    categorySlug: "fresh-fruits",
-    subcategory: "Citrus",
-    price: 90,
-    unit: "1kg",
-    image: "https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=900&q=85",
-      "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5a?auto=format&fit=crop&w=900&q=85"
-    ],
-    rating: 4.7,
-    reviewCount: 189,
-    availability: "in-stock",
-    featured: false,
-    description: "Juicy sweet oranges, rich in Vitamin C."
-  },
-  {
-    id: 11,
-    name: "Mustard Oil",
-    slug: "mustard-oil",
-    category: "Cooking Oils",
-    categorySlug: "cooking-oils",
-    subcategory: "Cold Pressed",
-    price: 150,
-    unit: "1L",
-    image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=900&q=85",
-      "https://images.unsplash.com/photo-1599940824399-b87987ced72a?auto=format&fit=crop&w=900&q=85"
-    ],
-    rating: 4.5,
-    reviewCount: 112,
-    availability: "in-stock",
-    featured: false,
-    description: "Cold-pressed mustard oil for authentic cooking."
-  },
-  {
-    id: 12,
-    name: "Fresh Milk",
-    slug: "fresh-milk",
-    category: "Dairy",
-    categorySlug: "dairy",
-    subcategory: "Milk",
-    price: 60,
-    unit: "1L",
-    image: "https://images.unsplash.com/photo-1628088062854-d1870b4553da?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1628088062854-d1870b4553da?auto=format&fit=crop&w=900&q=85",
-      "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=900&q=85"
-    ],
-    rating: 4.8,
-    reviewCount: 278,
-    availability: "in-stock",
-    featured: true,
-    description: "Fresh farm milk, pasteurized and pure."
-  }
+type CatalogEntry = Omit<Product, "id" | "rating" | "reviewCount" | "availability" | "featured" | "shortDescription" | "originalPrice" | "features" | "specifications">;
+
+const catalogEntries: CatalogEntry[] = [
+  // Fresh fruits: apples
+  { name: "Royal Gala Apples", slug: "royal-gala-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 185, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Apple-3040132_640.jpg", description: "Crisp red Royal Gala-style apples selected for a naturally sweet, refreshing bite." },
+  { name: "Red Delicious Apples", slug: "red-delicious-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 195, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/0/0c/An_Apple_A_Day_%28151245827%29.jpeg", description: "Bright red apples with a mild sweetness and a clean, crisp texture." },
+  { name: "Fuji Apples", slug: "fuji-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 210, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/ab/Apple-2535260_1920.jpg", description: "Juicy, firm apples with balanced sweetness for snacking and lunch boxes." },
+  { name: "Honeycrisp Apples", slug: "honeycrisp-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 260, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Honeycrisp.jpg", description: "Honeycrisp apples prized for their bright flavour and exceptionally crisp bite." },
+  { name: "Pink Lady Apples", slug: "pink-lady-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 245, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/71/PinkLadyApples.JPG", description: "A rosy apple variety with a pleasant sweet-tart finish." },
+  { name: "Classic Red Apples", slug: "classic-red-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 175, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg", description: "Everyday red apples chosen for their firm flesh and easy snacking." },
+  { name: "Zoete Peppel Apples", slug: "zoete-peppel-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 225, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/78/Apple_Malus_domestica_Zoete_Peppel._%28actm%29.jpg", description: "A heritage-style apple selection with a gently sweet, aromatic profile." },
+  { name: "Maroon Apples", slug: "maroon-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 205, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/Maroon_young_apple_fruit_DSC01290.jpg", description: "Deep-coloured apples with a fresh flavour suited to salads and desserts." },
+  { name: "Golden Delicious Apples", slug: "golden-delicious-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 220, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Golden_Delicious_apples.jpg", description: "Golden apples with a mellow sweetness that works well fresh or baked." },
+  { name: "Garden Apples", slug: "garden-apples", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Apples", price: 165, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/79/Apple_Fruit.jpg", description: "Fresh garden apples with a clean flavour for everyday family eating." },
+  // Fresh fruits: bananas
+  { name: "Congo Bananas", slug: "congo-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 65, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Banana%2C_Congo.jpg", description: "Naturally sweet bananas with a creamy texture and gentle tropical aroma." },
+  { name: "Sitia Bananas", slug: "sitia-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 70, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/78/Banana-Sitia-Crete.jpg", description: "Smooth, sunny bananas that ripen into a soft and fragrant snack." },
+  { name: "Cavendish Bananas", slug: "cavendish-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 60, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Banana_-_Q503.jpg", description: "A dependable everyday banana with a balanced sweetness." },
+  { name: "Mini Bananas", slug: "mini-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 85, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Banana_10.jpg", description: "Small-format bananas with concentrated sweetness, ideal for quick snacks." },
+  { name: "Dessert Bananas", slug: "dessert-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 68, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Banana_5.jpg", description: "Soft, naturally sweet bananas for smoothies, cereal and desserts." },
+  { name: "Fresh Yellow Bananas", slug: "fresh-yellow-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 62, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/5/56/Banana_7.jpg", description: "Bright yellow bananas selected at a ready-to-ripen stage." },
+  { name: "Ripe Bananas", slug: "ripe-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 58, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/5/53/Banana_8.jpg", description: "Ready-to-eat bananas with a soft texture and full fruit flavour." },
+  { name: "Farm Bananas", slug: "farm-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 59, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Banana_9.jpg", description: "Fresh farm bananas suited to breakfast bowls and baking." },
+  { name: "Saba Bananas", slug: "saba-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 78, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Banana_Saba.jpg", description: "A versatile banana variety with a hearty texture for cooking or eating fresh." },
+  { name: "Banana Cross-Section", slug: "banana-cross-section", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 64, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/f/ff/Banana_and_cross_section.jpg", description: "Fresh bananas with a creamy centre and naturally mild sweetness." },
+  { name: "Caturra Bananas", slug: "caturra-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 72, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/d/d3/Banana_caturra.JPG", description: "Caturra-style bananas with a fragrant tropical flavour." },
+  { name: "Musa Dessert Bananas", slug: "musa-dessert-bananas", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Bananas", price: 66, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/4/43/Banana_fruit_%28musa%29.jpg", description: "Classic Musa bananas with a smooth texture for everyday eating." },
+  // Fresh fruits: oranges
+  { name: "Ambersweet Oranges", slug: "ambersweet-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 105, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/4/43/Ambersweet_oranges.jpg", description: "Juicy Ambersweet-style oranges with bright citrus flavour." },
+  { name: "Blood Oranges", slug: "blood-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 190, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/f/fb/Blood_orange_%28DSCF7480%29.jpg", description: "Distinctive blood oranges with a deep colour and sweet-tart finish." },
+  { name: "Blood Orange Slices", slug: "blood-orange-slices", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 130, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Blood_orange_slice.jpg", description: "Fresh-cut blood orange pieces for salads, drinks and desserts." },
+  { name: "Sweet Table Oranges", slug: "sweet-table-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 95, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/ab/Orange-fruit-16x16.jpg", description: "Sweet table oranges with refreshing juice and fragrant zest." },
+  { name: "Valencia Oranges", slug: "valencia-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 110, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/9/94/Orange_--_2022_--_9711.jpg", description: "Juicy Valencia-style oranges for breakfast, juicing and cooking." },
+  { name: "Navel Oranges", slug: "navel-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 115, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Orange_--_2022_--_9713.jpg", description: "Easy-to-peel navel oranges with a clean, sweet citrus flavour." },
+  { name: "Premium Juice Oranges", slug: "premium-juice-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 100, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/8/80/Orange_--_2022_--_9715.jpg", description: "Full-juiced oranges selected for morning juice and everyday refreshment." },
+  { name: "Citrus Oranges", slug: "citrus-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 98, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/0/07/Orange_--_2022_--_9718.jpg", description: "Fresh citrus oranges with a lively aroma and balanced acidity." },
+  { name: "Farmhouse Oranges", slug: "farmhouse-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 92, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/3/37/Orange_--_2022_--_9721.jpg", description: "Everyday farmhouse oranges with plenty of juice and gentle sweetness." },
+  { name: "Navelina Oranges", slug: "navelina-oranges", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Oranges", price: 125, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/7a/Navelina_oranges.jpg", description: "Navelina-style oranges with a bright, juicy profile." },
+  // Fresh fruits: mangoes
+  { name: "Raw Green Mangoes", slug: "raw-green-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 90, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/5/59/An_unripe_mango_in_jaffna.JPG", description: "Firm green mangoes with a pleasantly tangy flavour for pickles and chutneys." },
+  { name: "Apple Mangoes", slug: "apple-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 165, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/9/92/Apple_mango_and_cross_section_edit1.jpg", description: "A fragrant apple-mango style fruit with juicy flesh and a floral finish." },
+  { name: "Alphonso-Style Mangoes", slug: "alphonso-style-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 280, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Mango_Mangifera_indica_fruit_by_Raju_Kasambe_DSCN2626_12.jpg", description: "Richly aromatic mangoes with soft golden flesh and dessert sweetness." },
+  { name: "Kesar-Style Mangoes", slug: "kesar-style-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 245, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/b/be/Mango_Mangifera_indica_fruit_by_Raju_Kasambe_DSCN2626_14.jpg", description: "A fragrant mango selection with a smooth, juicy bite." },
+  { name: "Small Dessert Mangoes", slug: "small-dessert-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 175, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Mango_Small.JPG", description: "Small mangoes with concentrated tropical sweetness for snacking." },
+  { name: "Nam Dok Mai Mangoes", slug: "nam-dok-mai-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 320, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/af/Mango_fruit_Nam_Dok_Mai.jpg", description: "Nam Dok Mai-style mangoes with silky flesh and honeyed aroma." },
+  { name: "Nam Dok Mai Cut Mango", slug: "nam-dok-mai-cut-mango", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 170, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/c/cb/Mango_fruit_Nam_Dok_Mai_-_cross_section.jpg", description: "Fresh-cut mango pieces with smooth texture for desserts and bowls." },
+  { name: "White Background Mangoes", slug: "white-background-mangoes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Mangoes", price: 185, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/3/34/Mango_on_white.jpg", description: "Ripe mangoes with sunny colour, soft flesh and a tropical finish." },
+  // Fresh fruits: lemons and berries
+  { name: "Fresh Lemons", slug: "fresh-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 75, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/e/e4/Lemon.jpg", description: "Bright, juicy lemons for dressings, drinks and everyday cooking." },
+  { name: "Whole Cut Lemons", slug: "whole-cut-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 80, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/f/f7/Lemon_-_whole_and_split.jpg", description: "Fresh lemons with fragrant zest and lively acidity." },
+  { name: "Citrus Limon Lemons", slug: "citrus-limon-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 85, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Lemon_%28Citrus_limon_aka_Citrus_%C3%97_limon%29.jpg", description: "Classic Citrus limon fruit with a sharp, refreshing flavour." },
+  { name: "Large Yellow Lemons", slug: "large-yellow-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 90, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Lemon_Fruit.jpg", description: "Plump yellow lemons with generous juice for kitchen staples." },
+  { name: "Shadow-Grown Lemons", slug: "shadow-grown-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 78, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/6/61/Lemon_with_shadow_lighting.jpg", description: "Fresh lemons with a clean citrus aroma and versatile acidity." },
+  { name: "Dewy Lemons", slug: "dewy-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 82, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/d/d3/Lemon_with_water_drop.jpg", description: "Juicy lemons selected for their fragrant peel and bright flavour." },
+  { name: "Garden Lemon Fruit", slug: "garden-lemon-fruit", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 72, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Picture_of_a_lemon_fruit.jpg", description: "Everyday garden lemons for tea, marinades and home cooking." },
+  { name: "Assam Lemons", slug: "assam-lemons", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Lemons", price: 88, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Lemon_from_Assam.jpg", description: "Aromatic lemons with a lively sourness and plenty of kitchen uses." },
+  { name: "Studio Strawberries", slug: "studio-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 220, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/d/de/FraiseFruitPhoto.jpg", description: "Red strawberries with a delicate aroma and naturally sweet finish." },
+  { name: "Wild Strawberries", slug: "wild-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 280, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/7/7a/Fragaria_vesca_fruit_-_Keila.jpg", description: "Small, fragrant strawberry fruit with a concentrated berry flavour." },
+  { name: "Fresh Farm Strawberries", slug: "fresh-farm-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 210, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/5/55/Strawberry_fruit_in_studio.jpg", description: "Fresh strawberries selected for firm texture and bright colour." },
+  { name: "Sliced Strawberries", slug: "sliced-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 230, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Strawberry_fruit_sliced.jpg", description: "Fresh strawberry pieces ready for breakfast bowls and desserts." },
+  { name: "White Background Strawberries", slug: "white-background-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 215, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Strawberry_on_white_background.jpg", description: "Sweet, juicy strawberries with a fresh berry aroma." },
+  { name: "Everyday Strawberries", slug: "everyday-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 200, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/b/bf/Strawberry-10.jpg", description: "Bright strawberries for snacking, smoothies and homemade desserts." },
+  { name: "Premium Strawberries", slug: "premium-strawberries", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 250, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/7/7a/Strawberry-2293337_960_720.jpg", description: "Premium strawberries with a juicy bite and balanced sweetness." },
+  { name: "Strawberry Sorbet Fruit", slug: "strawberry-sorbet-fruit", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Strawberries", price: 240, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Strawberry_Sorbetta.jpg", description: "A fragrant strawberry selection suited to fresh desserts and chilled treats." },
+  // Fresh fruits: pineapple, watermelon and grapes
+  { name: "Whole Pineapple", slug: "whole-pineapple", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 120, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/9/94/Pineapple-fruit.jpg", description: "A fragrant pineapple with juicy golden flesh and refreshing acidity." },
+  { name: "Dagbani Pineapple", slug: "dagbani-pineapple", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 125, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Pineapple_%28Alaafee_in_dagbani%29.jpg", description: "Sweet tropical pineapple selected for its aromatic fruit flesh." },
+  { name: "Pineapple Chunks", slug: "pineapple-chunks", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 145, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/8/80/Pineapple_Chunks.jpg", description: "Juicy pineapple chunks ready for bowls, desserts and fruit salads." },
+  { name: "Fresh Pineapple Fruit", slug: "fresh-pineapple-fruit", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 118, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/6/63/Pineapple_Fruit.jpg", description: "Fresh pineapple with tropical sweetness and a lively citrus note." },
+  { name: "Candied Pineapple", slug: "candied-pineapple", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 180, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Pineapple_candied_fruit_%281%29.jpg", description: "Sweet candied pineapple pieces for baking, gifting and desserts." },
+  { name: "Golden Candied Pineapple", slug: "golden-candied-pineapple", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 185, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Pineapple_candied_fruit_%282%29.jpg", description: "Golden candied pineapple with a chewy texture and tropical aroma." },
+  { name: "April Pineapple", slug: "april-pineapple", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 122, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Pineapple_fruit%2C_April_2023.jpg", description: "Fresh pineapple fruit with juicy flesh for family sharing." },
+  { name: "Pineapple Fruit Two", slug: "pineapple-fruit-two", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Pineapples", price: 124, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Pineapple_fruit_2.jpg", description: "A ripe pineapple with a bright tropical flavour and juicy texture." },
+  { name: "Hong Kong Watermelon", slug: "hong-kong-watermelon", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Watermelons", price: 95, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/8/84/HK_fruit_%E8%A5%BF%E7%93%9C_watermelon_August_2020_SS2_01.jpg", description: "Refreshing watermelon with crisp flesh and cooling sweetness." },
+  { name: "Fresh Red Watermelon", slug: "fresh-red-watermelon", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Watermelons", price: 92, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/1/11/HK_fruit_%E8%A5%BF%E7%93%9C_watermelon_August_2020_SS2_02.jpg", description: "Red-fleshed watermelon for summer drinks, salads and snacking." },
+  { name: "Ripe Watermelon", slug: "ripe-watermelon", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Watermelons", price: 98, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/78/Ripe_watermelon_Fruit.jpg", description: "Ripe watermelon with a juicy bite and clean, cool finish." },
+  { name: "Watermelon Fruit", slug: "watermelon-fruit", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Watermelons", price: 90, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/Watermelon001.jpg", description: "Fresh watermelon selected for crisp texture and natural sweetness." },
+  { name: "Bahar Watermelon", slug: "bahar-watermelon", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Watermelons", price: 100, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Watermelon_Bahar1.jpg", description: "A juicy watermelon variety for refreshing family portions." },
+  { name: "Green Table Grapes", slug: "green-table-grapes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Grapes", price: 160, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/2/22/Bijelo_grozde.jpg", description: "Crisp green table grapes with a light sweetness and refreshing finish." },
+  { name: "Close-Up Green Grapes", slug: "close-up-green-grapes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Grapes", price: 165, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/8/83/Green_Grape_2.jpg", description: "Fresh green grapes selected for crisp texture and bright flavour." },
+  { name: "Premium Green Grapes", slug: "premium-green-grapes", category: "Fresh Fruits", categorySlug: "fresh-fruits", subcategory: "Grapes", price: 175, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Green_Grape_3.jpg", description: "Sweet, juicy green grapes for snacking, cheese boards and desserts." },
+  // Fresh vegetables: potatoes and carrots
+  { name: "Table Potatoes", slug: "table-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 45, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/a3/234_Solanum_tuberosum_L.jpg", description: "Versatile table potatoes with firm flesh for roasting, boiling and curries." },
+  { name: "Dore Potatoes", slug: "dore-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 52, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/3/38/Dor%C3%A9_%28Solanum_tuberosum%29.jpg", description: "A golden potato selection with a creamy texture when cooked." },
+  { name: "Fresh Solanum Potatoes", slug: "fresh-solanum-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 48, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/a1/Potato_%28Solanum_tuberosum%29_%2835871124806%29.jpg", description: "Fresh potatoes for everyday meals, fries and comforting bakes." },
+  { name: "Russet Potatoes", slug: "russet-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 65, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/4/47/Russet_potato_cultivar_with_sprouts.jpg", description: "Russet-style potatoes with a fluffy centre and hearty skin." },
+  { name: "Mannheim Potatoes", slug: "mannheim-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 55, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/1/17/Solanum_tuberosum_Mannheim.jpg", description: "Firm potatoes suited to roasting, mash and home-style cooking." },
+  { name: "Puca Quitish Potatoes", slug: "puca-quitish-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 70, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/6/60/Solanum_tuberosum_Puca_Quitish.jpg", description: "A distinctive potato variety with a satisfying, earthy flavour." },
+  { name: "Red Scarlett Potatoes", slug: "red-scarlett-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 60, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Solanum_tuberosum_Red_Scarlett20170523_7825.jpg", description: "Red-skinned potatoes with firm flesh for salads and roasting." },
+  { name: "Garden Potatoes", slug: "garden-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 42, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Starr_080914-9946_Solanum_tuberosum.jpg", description: "Everyday garden potatoes for curries, fries and family dinners." },
+  { name: "White Potatoes", slug: "white-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 44, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/6/60/Solanum_tuberosum_03.JPG", description: "Clean, firm white potatoes with a dependable cooking texture." },
+  { name: "Large Potatoes", slug: "large-potatoes", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Potatoes", price: 46, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/7/73/Solanum_tuberosum_04.jpg", description: "Large potatoes ready for baking, wedges and hearty home cooking." },
+  { name: "Carrot.1", slug: "carrot-1", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 42, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/3/39/Carrot.1.jpg", description: "Crunchy orange carrots for salads, soups and everyday cooking." },
+  { name: "Market Carrots", slug: "market-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 40, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Carrot_%2846504416%29.jpeg", description: "Fresh carrots with a naturally sweet crunch and bright colour." },
+  { name: "Classic Carrots", slug: "classic-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 38, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Carrot_Picture.jpg", description: "Everyday carrots selected for firm texture and clean flavour." },
+  { name: "Fresh View Carrots", slug: "fresh-view-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 41, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/0/05/Carrot_view.jpg", description: "Fresh orange carrots for roasting, juicing and lunch boxes." },
+  { name: "Farm Carrots", slug: "farm-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 39, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/d/dc/Carrot-fb.jpg", description: "Farm-style carrots with a crisp bite and gentle sweetness." },
+  { name: "April Carrots", slug: "april-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 43, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/9/92/Carrot_vegetables%2C_April_2023.jpg", description: "Bright fresh carrots for soups, stir-fries and salads." },
+  { name: "Daucus Carota Carrots", slug: "daucus-carota-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 45, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/c/cf/Carrots_-_Daucus_carota_subsp._sativus.jpg", description: "Classic Daucus carota carrots with a crisp, naturally sweet flavour." },
+  { name: "Berlikumer Carrots", slug: "berlikumer-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 48, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Daucus_carota_subsp._sativus_Berlikumer_2_-_Perfekcja_REW_2023-06-13_7557.jpg", description: "Berlikumer-style carrots with firm flesh and rich orange colour." },
+  { name: "Berlikumer Select Carrots", slug: "berlikumer-select-carrots", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Carrots", price: 50, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/2/22/Daucus_carota_subsp._sativus_Berlikumer_2_-_Perfekcja_REW_2023-06-13_7558.jpg", description: "Selected Berlikumer carrots for roasting, soups and fresh juice." },
+  // Fresh vegetables: garlic, peppers, onion and greens
+  { name: "Garlic Bulb", slug: "garlic-bulb", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Garlic", price: 55, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Garlic.JPG", description: "Aromatic garlic bulbs for tempering, marinades and everyday cooking." },
+  { name: "Salem Garlic Bulbs", slug: "salem-garlic-bulbs", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Garlic", price: 68, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/6/65/Garlic_bulbs_of_Salem.jpg", description: "Pungent garlic bulbs with a rich aroma and clean cloves." },
+  { name: "Fresh Garlic Cloves", slug: "fresh-garlic-cloves", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Garlic", price: 62, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/4/47/Garlic_Cloves.jpg", description: "Peeled garlic cloves ready for sauces, curries and roasting." },
+  { name: "Garlic Bulbs and Cloves", slug: "garlic-bulbs-and-cloves", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Garlic", price: 60, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Garlic_bulbs_and_cloves.jpg", description: "Fresh garlic with full bulbs and easy-to-use cloves." },
+  { name: "Garlic Bulbs in Bag", slug: "garlic-bulbs-in-bag", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Garlic", price: 58, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Garlic_bulbs_in_a_bag.jpg", description: "Kitchen-ready garlic bulbs with a strong, savoury aroma." },
+  { name: "Opened Garlic Bulb", slug: "opened-garlic-bulb", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Garlic", price: 64, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/4/49/Opened_garlic_bulb_with_garlic_clove.jpg", description: "Fresh garlic bulb with firm cloves for flavourful home cooking." },
+  { name: "Baby Bell Peppers", slug: "baby-bell-peppers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 115, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/2/2d/Baby_Bell_pepper_%27%27Capsicum_annuum%27%27_.jpg", description: "Small sweet peppers with crisp flesh for salads and stir-fries." },
+  { name: "Baby Bell Pepper Three", slug: "baby-bell-pepper-three", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 120, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/2/23/Baby_Bell_pepper_Capsicum_annuum_3.jpg", description: "Colourful baby bell peppers with a gentle sweetness and crunch." },
+  { name: "Fiesta Peppers", slug: "fiesta-peppers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 105, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/1/11/Capsicum_annuum_var._Fiesta_-_MHNT.jpg", description: "Fiesta-style peppers for bright, crisp everyday cooking." },
+  { name: "Green Peppers", slug: "green-peppers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 90, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/3/35/Green_pepper_%F0%9F%8D%B6%EF%B8%8F.jpg", description: "Crisp green peppers with a fresh, lightly grassy flavour." },
+  { name: "Ile Baby Bell Peppers", slug: "ile-baby-bell-peppers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 118, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/4/4a/IleBaby_Bell_pepper_Capsicum_annuum_2.jpg", description: "Tender baby bell peppers for roasting, stuffing and salads." },
+  { name: "Sweet Pepper 04", slug: "sweet-pepper-04", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 95, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/8/8b/Pepper_04.jpg", description: "Fresh sweet pepper with crisp flesh for daily meals." },
+  { name: "Sweet Pepper 05", slug: "sweet-pepper-05", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 95, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/5/55/Pepper_05.jpg", description: "Bright sweet pepper selected for clean flavour and firm texture." },
+  { name: "Red Bell Peppers", slug: "red-bell-peppers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Peppers", price: 110, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Red_bell_pepper.jpg", description: "Crisp red bell peppers with mellow sweetness for salads and cooking." },
+  { name: "Spanish Onions", slug: "spanish-onions", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Onions", price: 48, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Ida_Pulis_Lathrop_Spanish_onion.jpg", description: "Mild Spanish-style onions with a clean, savoury flavour." },
+  { name: "Onion Greens", slug: "onion-greens", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Onions", price: 35, unit: "250g", image: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Onion_leaves.JPG", description: "Fresh onion greens for garnishes, stir-fries and savoury dishes." },
+  { name: "Everyday Onions", slug: "everyday-onions", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Onions", price: 42, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/1/13/Onion_vegetable.jpg", description: "Versatile onions for curries, soups, salads and everyday cooking." },
+  { name: "Fresh Onion Vegetable", slug: "fresh-onion-vegetable", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Onions", price: 44, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Onions_vegetable.jpg", description: "Fresh onions with a balanced bite and dependable kitchen value." },
+  { name: "Baked Onion Selection", slug: "baked-onion-selection", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Onions", price: 52, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Baked_onions.jpg", description: "Onions selected for their sweet, savoury character when roasted or baked." },
+  { name: "Fresh Cabbage", slug: "fresh-cabbage", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cabbage", price: 55, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/A_cabbage_vegetables.jpg", description: "Fresh cabbage with crisp leaves for slaws, stir-fries and curries." },
+  { name: "Green Cabbage", slug: "green-cabbage", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cabbage", price: 52, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/6/60/Cabbage_001.jpg", description: "Firm green cabbage with fresh leaves and a mild flavour." },
+  { name: "Cabbage Vegetable", slug: "cabbage-vegetable", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cabbage", price: 54, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Cabbage_Vegetable.jpg", description: "A versatile cabbage for soups, wraps, salads and home cooking." },
+  { name: "Fresh White Cabbage", slug: "fresh-white-cabbage", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cabbage", price: 56, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Cabbage_vegetable.jpg", description: "Fresh white cabbage with crisp texture and gentle sweetness." },
+  { name: "Tender Cabbage", slug: "tender-cabbage", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cabbage", price: 58, unit: "1 piece", image: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Fresh_cabbage_1.jpg", description: "Tender cabbage selected for fresh leaves and easy preparation." },
+  // Fresh vegetables: broccoli, eggplant and cucumber
+  { name: "Romanesco Broccoli", slug: "romanesco-broccoli", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Broccoli", price: 135, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Romanesco_broccoli_%28Brassica_oleracea%29.jpg", description: "Distinctive Romanesco broccoli with firm florets and a mild nutty flavour." },
+  { name: "Romanesco Broccoli 2025", slug: "romanesco-broccoli-2025", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Broccoli", price: 140, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/b/b6/Romanesco_broccoli_2025_G1.jpg", description: "Fresh Romanesco florets for steaming, roasting and vegetable bowls." },
+  { name: "Romanesco Broccoli Select", slug: "romanesco-broccoli-select", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Broccoli", price: 145, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/2/26/Romanesco_broccoli_2025_G2.jpg", description: "A carefully selected Romanesco head with crisp, tender florets." },
+  { name: "Broccoli Cross Section", slug: "broccoli-cross-section", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Broccoli", price: 125, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/0/03/Broccoli_and_cross_section_edit.jpg", description: "Fresh broccoli with compact florets for quick, wholesome cooking." },
+  { name: "Eggplant", slug: "eggplant", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Eggplant", price: 65, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/8/89/Egg_plant.JPG", description: "Glossy eggplant with tender flesh for curries, grilling and roasting." },
+  { name: "Classic Aubergine", slug: "classic-aubergine", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Eggplant", price: 70, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/9/96/Eggplant_(227905221).jpeg", description: "Classic aubergine with smooth skin and a creamy cooked texture." },
+  { name: "Brinjal", slug: "brinjal", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Eggplant", price: 62, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/0/05/Eggplant_aubergine_brinjal.jpg", description: "Fresh brinjal for bharta, sambhar, stir-fries and family meals." },
+  { name: "Fresh Cucumbers", slug: "fresh-cucumbers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cucumbers", price: 45, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Cucumber_in_jaffna.JPG", description: "Cool, crisp cucumbers for salads, raita and refreshing snacks." },
+  { name: "Cucumis Sativus Cucumbers", slug: "cucumis-sativus-cucumbers", category: "Fresh Vegetables", categorySlug: "fresh-vegetables", subcategory: "Cucumbers", price: 48, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/0/07/Cucumis_sativus_0001.JPG", description: "Fresh Cucumis sativus cucumbers with a clean, watery crunch." },
+  // Rice and grains
+  { name: "Long Grain Rice", slug: "long-grain-rice", category: "Rice", categorySlug: "rice", subcategory: "Long Grain", price: 105, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Single_grain_of_rice.png", description: "Long grain rice with separate grains for pilafs, bowls and everyday meals." },
+  { name: "White Rice Grains", slug: "white-rice-grains", category: "Rice", categorySlug: "rice", subcategory: "White Rice", price: 95, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Rice_Grains.jpg", description: "Clean white rice grains for dependable daily cooking." },
+  { name: "Polished Rice", slug: "polished-rice", category: "Rice", categorySlug: "rice", subcategory: "White Rice", price: 100, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Rice_Grains_.png", description: "Smooth rice grains that cook into a light, comforting staple." },
+  { name: "Sprouted Rice", slug: "sprouted-rice", category: "Rice", categorySlug: "rice", subcategory: "Specialty Rice", price: 135, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Rice_grain_sprouted.jpg", description: "A specialty rice grain selection for thoughtful pantry cooking." },
+  { name: "IRRI Rice Grains", slug: "irri-rice-grains", category: "Rice", categorySlug: "rice", subcategory: "Rice Grains", price: 110, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Rice_grains_%28IRRI%29.jpg", description: "Rice grains selected for consistent texture in everyday recipes." },
+  { name: "Japanese Short-Grain Rice", slug: "japanese-short-grain-rice", category: "Rice", categorySlug: "rice", subcategory: "Short Grain", price: 180, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/2/29/Short-grain_rice_%28japonica%29.jpg", description: "Short-grain Japanese-style rice with a naturally tender, cohesive texture." },
+  { name: "Brown Rice", slug: "brown-rice", category: "Rice", categorySlug: "rice", subcategory: "Brown Rice", price: 145, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/4/45/Brown_rice_%28whole_grain_rice%29_photographed_in_West_Bengal%2C_India.jpg", description: "Whole-grain brown rice with a satisfying bite for balanced meals." },
+  { name: "Purple Rice", slug: "purple-rice", category: "Rice", categorySlug: "rice", subcategory: "Specialty Rice", price: 190, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Purple_rice_grains.jpg", description: "Naturally dark purple rice grains for colourful bowls and special dishes." },
+  { name: "US Long Grain Rice", slug: "us-long-grain-rice", category: "Rice", categorySlug: "rice", subcategory: "Long Grain", price: 115, unit: "1kg", image: "https://upload.wikimedia.org/wikipedia/commons/e/e9/U.S._long_grain_rice_K7577-1.jpg", description: "Long grain rice with a light, fluffy finish after cooking." },
+  { name: "Defective Grain Reference Rice", slug: "defective-grain-reference-rice", category: "Rice", categorySlug: "rice", subcategory: "Specialty Rice", price: 90, unit: "500g", image: "https://upload.wikimedia.org/wikipedia/commons/1/1c/Defective_rice_grains.jpg", description: "A specialty grain selection presented for pantry and cooking exploration." }
 ];
+
+const buildProduct = (entry: CatalogEntry, index: number): Product => ({
+  ...entry,
+  id: index + 1,
+  rating: Number((4.3 + ((index * 7) % 7) / 10).toFixed(1)),
+  reviewCount: 24 + ((index * 37) % 290),
+  availability: index % 29 === 0 ? "low-stock" : "in-stock",
+  featured: index < 12 || index % 23 === 0,
+  shortDescription: `${entry.name}, selected for dependable freshness and everyday value.`,
+  originalPrice: entry.price + Math.max(8, Math.round(entry.price * 0.12)),
+  features: [
+    "Product-specific fresh selection",
+    "Carefully checked before dispatch",
+    "Suitable for everyday kitchen use",
+  ],
+  specifications: [
+    { label: "Product", value: entry.name },
+    { label: "Category", value: entry.category },
+    { label: "Pack size", value: entry.unit },
+    { label: "Selection", value: "Freshira catalogue standard" },
+  ],
+});
+
+const productSeed: Product[] = catalogEntries.map(buildProduct);
 
 export const products: Product[] = productSeed;
 
-export const featuredProducts: Product[] = products.filter(p => p.featured);
+export const featuredProducts: Product[] = products.filter((product) => product.featured);
 
-export const bestSellerProducts: Product[] = products
+export const bestSellerProducts: Product[] = [...products]
   .sort((a, b) => b.reviewCount - a.reviewCount)
   .slice(0, 4);
 
 export const newArrivalProducts: Product[] = products.slice(0, 4);
 
-export const seasonalProducts: Product[] = products.filter(p => 
-  ["fresh-fruits", "fresh-vegetables"].includes(p.categorySlug)
-).slice(0, 4);
+export const seasonalProducts: Product[] = products
+  .filter((product) => ["fresh-fruits", "fresh-vegetables"].includes(product.categorySlug))
+  .slice(0, 4);
 
 export const getProductBySlug = (slug: string): Product | undefined =>
-  products.find(p => p.slug === slug);
+  products.find((product) => product.slug === slug);
 
 export const getRelatedProducts = (product: Product): Product[] =>
   products
-    .filter(p => p.categorySlug === product.categorySlug && p.id !== product.id)
+    .filter((item) => item.categorySlug === product.categorySlug && item.id !== product.id)
     .slice(0, 4);

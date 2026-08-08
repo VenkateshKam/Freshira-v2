@@ -123,6 +123,8 @@ function HeroVideoBackground() {
         loop
         muted
         playsInline
+        preload="metadata"
+        aria-hidden="true"
         onCanPlay={() => setIsVideoLoaded(true)}
         initial={{ opacity: 0, scale: 1.05 }}
         animate={{ opacity: isVideoLoaded ? 0.8 : 0, scale: 1.05 }}
@@ -130,15 +132,7 @@ function HeroVideoBackground() {
         className="absolute inset-0 h-full w-full object-cover pointer-events-none"
       >
         <source
-          src="https://assets.mixkit.co/videos/preview/mixkit-hands-holding-fresh-organic-vegetables-42998-large.mp4"
-          type="video/mp4"
-        />
-        <source
-          src="https://assets.mixkit.co/videos/preview/mixkit-fresh-vegetables-in-a-market-43093-large.mp4"
-          type="video/mp4"
-        />
-        <source
-          src="https://assets.mixkit.co/videos/preview/mixkit-farmer-holding-soil-in-his-hands-4630-large.mp4"
+          src="https://videos.pexels.com/video-files/5765580/5765580-sd_960_540_30fps.mp4"
           type="video/mp4"
         />
       </motion.video>
@@ -585,4 +579,3 @@ function ProductSection({
     </section>
   );
 }
-
