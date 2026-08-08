@@ -8,7 +8,7 @@ export interface Product {
   price: number;
   unit: string;
   image: string;
-  gallery: string[];
+  gallery?: string[];
   rating: number;
   reviewCount: number;
   availability: "in-stock" | "low-stock" | "out-of-stock";
